@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F1698662BD6667A00163BFD /* detectSkinToneLib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8F1698652BD6667A00163BFD /* detectSkinToneLib.docc */; };
+		8F16986C2BD6667A00163BFD /* detectSkinToneLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F1698612BD6667A00163BFD /* detectSkinToneLib.framework */; };
+		8F1698712BD6667A00163BFD /* detectSkinToneLibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1698702BD6667A00163BFD /* detectSkinToneLibTests.swift */; };
+		8F1698722BD6667A00163BFD /* detectSkinToneLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F1698642BD6667A00163BFD /* detectSkinToneLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F16987E2BD6669800163BFD /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F16987B2BD6669500163BFD /* ImageProcessor.swift */; };
+		8F16987F2BD6669800163BFD /* SkinToneDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F16987C2BD6669500163BFD /* SkinToneDetection.swift */; };
+		8F1698802BD6669800163BFD /* FCNResNet101.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 8F16987D2BD6669800163BFD /* FCNResNet101.mlpackage */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F16986D2BD6667A00163BFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F1698582BD6667A00163BFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F1698602BD6667A00163BFD;
+			remoteInfo = detectSkinToneLib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8F1698612BD6667A00163BFD /* detectSkinToneLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = detectSkinToneLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F1698642BD6667A00163BFD /* detectSkinToneLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = detectSkinToneLib.h; sourceTree = "<group>"; };
+		8F1698652BD6667A00163BFD /* detectSkinToneLib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = detectSkinToneLib.docc; sourceTree = "<group>"; };
+		8F16986B2BD6667A00163BFD /* detectSkinToneLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = detectSkinToneLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F1698702BD6667A00163BFD /* detectSkinToneLibTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detectSkinToneLibTests.swift; sourceTree = "<group>"; };
+		8F16987B2BD6669500163BFD /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		8F16987C2BD6669500163BFD /* SkinToneDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinToneDetection.swift; sourceTree = "<group>"; };
+		8F16987D2BD6669800163BFD /* FCNResNet101.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = FCNResNet101.mlpackage; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F16985E2BD6667A00163BFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F1698682BD6667A00163BFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F16986C2BD6667A00163BFD /* detectSkinToneLib.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8F1698572BD6667A00163BFD = {
+			isa = PBXGroup;
+			children = (
+				8F1698632BD6667A00163BFD /* detectSkinToneLib */,
+				8F16986F2BD6667A00163BFD /* detectSkinToneLibTests */,
+				8F1698622BD6667A00163BFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8F1698622BD6667A00163BFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F1698612BD6667A00163BFD /* detectSkinToneLib.framework */,
+				8F16986B2BD6667A00163BFD /* detectSkinToneLibTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F1698632BD6667A00163BFD /* detectSkinToneLib */ = {
+			isa = PBXGroup;
+			children = (
+				8F1698642BD6667A00163BFD /* detectSkinToneLib.h */,
+				8F16987D2BD6669800163BFD /* FCNResNet101.mlpackage */,
+				8F16987B2BD6669500163BFD /* ImageProcessor.swift */,
+				8F16987C2BD6669500163BFD /* SkinToneDetection.swift */,
+				8F1698652BD6667A00163BFD /* detectSkinToneLib.docc */,
+			);
+			path = detectSkinToneLib;
+			sourceTree = "<group>";
+		};
+		8F16986F2BD6667A00163BFD /* detectSkinToneLibTests */ = {
+			isa = PBXGroup;
+			children = (
+				8F1698702BD6667A00163BFD /* detectSkinToneLibTests.swift */,
+			);
+			path = detectSkinToneLibTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8F16985C2BD6667A00163BFD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F1698722BD6667A00163BFD /* detectSkinToneLib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8F1698602BD6667A00163BFD /* detectSkinToneLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F1698752BD6667A00163BFD /* Build configuration list for PBXNativeTarget "detectSkinToneLib" */;
+			buildPhases = (
+				8F16985C2BD6667A00163BFD /* Headers */,
+				8F16985D2BD6667A00163BFD /* Sources */,
+				8F16985E2BD6667A00163BFD /* Frameworks */,
+				8F16985F2BD6667A00163BFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = detectSkinToneLib;
+			productName = detectSkinToneLib;
+			productReference = 8F1698612BD6667A00163BFD /* detectSkinToneLib.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8F16986A2BD6667A00163BFD /* detectSkinToneLibTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F1698782BD6667A00163BFD /* Build configuration list for PBXNativeTarget "detectSkinToneLibTests" */;
+			buildPhases = (
+				8F1698672BD6667A00163BFD /* Sources */,
+				8F1698682BD6667A00163BFD /* Frameworks */,
+				8F1698692BD6667A00163BFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F16986E2BD6667A00163BFD /* PBXTargetDependency */,
+			);
+			name = detectSkinToneLibTests;
+			productName = detectSkinToneLibTests;
+			productReference = 8F16986B2BD6667A00163BFD /* detectSkinToneLibTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8F1698582BD6667A00163BFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					8F1698602BD6667A00163BFD = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					8F16986A2BD6667A00163BFD = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 8F16985B2BD6667A00163BFD /* Build configuration list for PBXProject "detectSkinToneLib" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8F1698572BD6667A00163BFD;
+			productRefGroup = 8F1698622BD6667A00163BFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8F1698602BD6667A00163BFD /* detectSkinToneLib */,
+				8F16986A2BD6667A00163BFD /* detectSkinToneLibTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8F16985F2BD6667A00163BFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F1698692BD6667A00163BFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8F16985D2BD6667A00163BFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F16987E2BD6669800163BFD /* ImageProcessor.swift in Sources */,
+				8F16987F2BD6669800163BFD /* SkinToneDetection.swift in Sources */,
+				8F1698662BD6667A00163BFD /* detectSkinToneLib.docc in Sources */,
+				8F1698802BD6669800163BFD /* FCNResNet101.mlpackage in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8F1698672BD6667A00163BFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F1698712BD6667A00163BFD /* detectSkinToneLibTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F16986E2BD6667A00163BFD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F1698602BD6667A00163BFD /* detectSkinToneLib */;
+			targetProxy = 8F16986D2BD6667A00163BFD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8F1698732BD6667A00163BFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8F1698742BD6667A00163BFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8F1698762BD6667A00163BFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = AIMDek.detectSkinToneLib;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F1698772BD6667A00163BFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = AIMDek.detectSkinToneLib;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8F1698792BD6667A00163BFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AIMDek.detectSkinToneLibTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F16987A2BD6667A00163BFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = AIMDek.detectSkinToneLibTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8F16985B2BD6667A00163BFD /* Build configuration list for PBXProject "detectSkinToneLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F1698732BD6667A00163BFD /* Debug */,
+				8F1698742BD6667A00163BFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F1698752BD6667A00163BFD /* Build configuration list for PBXNativeTarget "detectSkinToneLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F1698762BD6667A00163BFD /* Debug */,
+				8F1698772BD6667A00163BFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F1698782BD6667A00163BFD /* Build configuration list for PBXNativeTarget "detectSkinToneLibTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F1698792BD6667A00163BFD /* Debug */,
+				8F16987A2BD6667A00163BFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8F1698582BD6667A00163BFD /* Project object */;
+}
