@@ -487,8 +487,10 @@ public class LifePlusReactModule extends ReactContextBaseJavaModule {
                     return;
                 }
 
+                boolean isSyncRead = !json.has("autoMeasure");
+
                 BleServices.setCurrentProcState(BleProcEnum.APP_SYNC, BleProcStateEnum.NONE);
-                AppSyncResponse mAppSyncResponse = _bleService.startAppSync(false);
+                AppSyncResponse mAppSyncResponse = _bleService.startAppSync(isSyncRead, false);
                 if (mAppSyncResponse != null) {
                     pPromise.resolve(mAppSyncResponse.getResponseStr());
                 } else {

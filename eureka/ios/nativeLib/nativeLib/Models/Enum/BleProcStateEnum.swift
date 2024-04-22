@@ -38,6 +38,7 @@ public enum BleProcStateEnum {
   case SET_MEASURE_CALC_AFTER
 
   // AppSync states
+  case APP_SYNC_READ
   case APP_SYNC_WRITE
 
   // Calibration states

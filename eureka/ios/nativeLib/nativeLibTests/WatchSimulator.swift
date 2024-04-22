@@ -13,6 +13,7 @@ class WatchSimulator: CBMPeripheralSpecDelegate {
     let name: String
     var connected = false
     var simulateConnectError = false
+    var autoMeasure = true
     var discoveredServices: [CBMServiceMock] = []
     var notifiedChars: [CBMCharacteristicMock] = []
     var notifyErrorChars: [String] = []
@@ -139,7 +140,7 @@ class WatchSimulator: CBMPeripheralSpecDelegate {
         readChars.append(characteristic)
         switch characteristic.uuid.uuidString {
         case GattCharEnum.USER_DATA.code:
-            let data = Data([1]) + Data(repeating: 0, count: 9)
+            let data = Data([autoMeasure ? 1 : 0]) + Data(repeating: 0, count: 9)
             return .success(data)
         case GattCharEnum.STATUS.code:
             return .success(Data(repeating: 128, count: 1))

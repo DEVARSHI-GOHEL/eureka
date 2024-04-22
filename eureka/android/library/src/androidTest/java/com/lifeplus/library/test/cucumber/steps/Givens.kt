@@ -98,6 +98,11 @@ class Givens {
         BleDevice._blueToothGatt = CucumberCtx.mockGatt
     }
 
+    @Given("watch auto-measure switch is {string}")
+    fun watch_auto_measure_switch_is_x(autoMeasure: String) {
+        CucumberCtx.autoMeasure = autoMeasure == "ON"
+    }
+
     @Given("firmware update will complete with {string}")
     fun given_firmware_update_will_complete_with_x(result: String) {
         CucumberCtx.fwUpdateResult = when (result) {

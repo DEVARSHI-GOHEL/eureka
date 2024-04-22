@@ -7,11 +7,38 @@ Feature: The React Native app can sync with LifeLeaf watch
   Background:
     Given app creates native module
     And watch is already connected
+    
+  @SEQ-505
+  Scenario: App sync success with auto-measure OFF
+    Given services and characteristics already discovered
+    And notify set for 'STATUS' characteristic
+    And watch auto-measure switch is 'OFF'
+    When app requests app sync read
+    Then app sync response shall start
+    And characteristic 'USER_DATA' value should be read
+    And characteristic 'USER_DATA' should be written with value '0,15,.,.,.,.,.,.,.,.'
+    And event with message '299' - 'App Sync completed' should be emitted to the app
+
+  @SEQ-505
+  Scenario: App sync success with auto-measure ON
+    Given services and characteristics already discovered
+    And notify set for 'STATUS' characteristic
+    And watch auto-measure switch is 'ON'
+    When app requests app sync read
+    Then app sync response shall start
+    And characteristic 'USER_DATA' value should be read
+    And characteristic 'USER_DATA' should be written with value '1,15,.,.,.,.,.,.,.,.'
+    And event with message '299' - 'App Sync completed' should be emitted to the app
 
   @SEQ-30
   Scenario: App sync success
     Given services and characteristics already discovered
     And notify set for 'STATUS' characteristic
+    When app requests app sync read
+    Then app sync response shall start
+    And characteristic 'USER_DATA' value should be read
+    And characteristic 'USER_DATA' value should be written
+    And event with message '299' - 'App Sync completed' should be emitted to the app
     When app requests app sync write with 'valid' params
     | height_ft | height_in | weight | ethnicity | gender | skin_tone |
     | 5         | 6         | 96     | 2         | F      | 2         |

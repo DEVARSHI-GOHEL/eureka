@@ -43,7 +43,7 @@ Feature: The React Native app can connect to LifeLeaf watch
     And characteristic 'STEP_COUNTER' value should be read
     And event with message '305: offline data read complete' should be emitted to the app
     And characteristic 'FIRMWARE_REVISION' value should be read
-    And characteristic 'USER_INFO' value should be written
+    And characteristic 'USER_INFO' value should be read
     And event with message '299: App Sync completed' should be emitted to the app
     And characteristic 'STATUS' value should be read
     And event with message '023: Watch battery normal' should be emitted to the app

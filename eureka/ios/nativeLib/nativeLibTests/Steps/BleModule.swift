@@ -37,7 +37,11 @@ func setupBleSteps() {
             XCTFail("Peripheral connect timeout")
         }
     }
-
+    
+    Given("watch auto-measure switch is '(.+)'") { matches, _ in
+        simulator.autoMeasure = matches[1] == "ON"
+    }
+    
     Given("services and characteristics already discovered") { _, _ in
         peripheral?.discoverServices(nil)
         if !wait(for: { peripheral?.services?.count ?? 0 > 0 }, with: 2.0) {
@@ -209,7 +213,14 @@ func setupBleSteps() {
             wait(0.5)
         }
     }
-
+    
+    When("app requests app sync read") { matches, _ in
+        Global.setUserId(pUserId: 123)
+        try! DbAccess.addTestUser(userId: Global.getUserId())
+        let request = "{\"userId\": \"\(Global.getUserId())\", \"deviceMsn\": \"SEQ001\"}"
+        lastResponse = bleModule.appSync(request)
+    }
+    
     When("app requests app sync write with '(.+)' params") { matches, step in
         Global.setUserId(pUserId: 123)
         try? DbAccess.addTestUser(userId: Global.getUserId())

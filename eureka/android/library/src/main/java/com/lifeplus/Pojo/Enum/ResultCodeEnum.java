@@ -64,7 +64,7 @@ public enum ResultCodeEnum {
 
     // AppSync Success and Intermediate
     APPSYNC_COMPLETED('S', "299", "App Sync completed", BleProcStateEnum.NONE),
-    APPSYNC_ACKNOWLEDGE('I', "298", "Request is being processed", BleProcStateEnum.APP_SYNC_WRITE),
+    APPSYNC_ACKNOWLEDGE('I', "298", "Request is being processed", BleProcStateEnum.APP_SYNC_READ),
 
 
     // AppSync errors

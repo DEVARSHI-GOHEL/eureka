@@ -41,6 +41,7 @@ public enum BleProcStateEnum {
     FIRMWARE_REVISION_READ("Firmware revision read", 5),
 
     // AppSync states
+    APP_SYNC_READ("App sync read", 5),
     APP_SYNC_WRITE("App sync write", 5),
     // Calibration states
     CALIBRATION_REFERENCE_WRITE("Calibration reference write", 5),

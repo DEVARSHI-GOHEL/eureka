@@ -183,7 +183,9 @@ public class BleModule {
                 return AppSyncResponse(pErrorCode: ResultCodeEnum.INVALID_MSN, pMessage: "Received (\(mInputStr))").getResponseStr()
               }
 
-              if let mAppSyncResponse = StartAppSyncFn([:], pNewProc: BleProcEnum.APP_SYNC, pNewProcState: BleProcStateEnum.APP_SYNC_WRITE).doOperation() as? AppSyncResponse {
+              let appSyncState = jObj["autoMeasure"] != nil ? BleProcStateEnum.APP_SYNC_WRITE : BleProcStateEnum.APP_SYNC_READ
+
+              if let mAppSyncResponse = StartAppSyncFn([:], pNewProc: BleProcEnum.APP_SYNC, pNewProcState: appSyncState).doOperation() as? AppSyncResponse {
                   if (mAppSyncResponse.getResultCode().type.lowercased() == "failed") {
                       DeviceService.resetCurrentProcState()
                   }

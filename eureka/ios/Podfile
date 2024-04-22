@@ -48,3 +48,14 @@ target 'nativeLib' do
     # Pods for testing
   end
 end
+
+target 'detectSkinToneLib' do
+  use_frameworks! :linkage => :static
+  project 'detectSkinToneLib/detectSkinToneLib.xcodeproj'
+  # GRDB 5 with SQLCipher 4
+
+  target 'detectSkinToneLibTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end

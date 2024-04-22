@@ -1,5 +1,4 @@
 {
-  "originHash" : "8a40817a3c37681f36cba4350f762c59211409f2dfd3aeb68ee03cc2ff8ba885",
   "pins" : [
     {
       "identity" : "cucumberswift",
@@ -29,5 +28,5 @@
       }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

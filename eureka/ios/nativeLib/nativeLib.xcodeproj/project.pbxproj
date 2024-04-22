@@ -58,6 +58,7 @@
 		443CD7A72704C98400FEA36F /* BLEProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7A42704C98400FEA36F /* BLEProcess.swift */; };
 		443CD7A82704C98400FEA36F /* ProceesStateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7A52704C98400FEA36F /* ProceesStateResponse.swift */; };
 		443CD7A92704C98400FEA36F /* MeasureProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7A62704C98400FEA36F /* MeasureProcess.swift */; };
+		443CD7AE2704C9F800FEA36F /* AppSyncReadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7AB2704C9F800FEA36F /* AppSyncReadEvent.swift */; };
 		443CD7AF2704C9F800FEA36F /* StatusReadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7AC2704C9F800FEA36F /* StatusReadEvent.swift */; };
 		443CD7B02704C9F800FEA36F /* EventBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7AD2704C9F800FEA36F /* EventBase.swift */; };
 		443CD7B32704CA9000FEA36F /* HttpConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CD7B22704CA9000FEA36F /* HttpConnectionManager.swift */; };
@@ -215,6 +216,7 @@
 		443CD7A42704C98400FEA36F /* BLEProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEProcess.swift; sourceTree = "<group>"; };
 		443CD7A52704C98400FEA36F /* ProceesStateResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProceesStateResponse.swift; sourceTree = "<group>"; };
 		443CD7A62704C98400FEA36F /* MeasureProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasureProcess.swift; sourceTree = "<group>"; };
+		443CD7AB2704C9F800FEA36F /* AppSyncReadEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSyncReadEvent.swift; sourceTree = "<group>"; };
 		443CD7AC2704C9F800FEA36F /* StatusReadEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusReadEvent.swift; sourceTree = "<group>"; };
 		443CD7AD2704C9F800FEA36F /* EventBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBase.swift; sourceTree = "<group>"; };
 		443CD7B22704CA9000FEA36F /* HttpConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpConnectionManager.swift; sourceTree = "<group>"; };
@@ -590,8 +592,9 @@
 		443CD7AA2704C9F800FEA36F /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				443CD7AD2704C9F800FEA36F /* EventBase.swift */,
+				443CD7AB2704C9F800FEA36F /* AppSyncReadEvent.swift */,
 				443CD7AC2704C9F800FEA36F /* StatusReadEvent.swift */,
+				443CD7AD2704C9F800FEA36F /* EventBase.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 			files = (
 				443CD87B2706503C00FEA36F /* DbQueryType.swift in Sources */,
 				0FBAB406286B24EF00F1AC2D /* FirmwareUpdateResponse.swift in Sources */,
+				443CD7AE2704C9F800FEA36F /* AppSyncReadEvent.swift in Sources */,
 				0CAD6C7828F97A910079FC6C /* StepGoalResponse.swift in Sources */,
 				443CD8122704DCA000FEA36F /* StartCalibrationFn.swift in Sources */,
 				443CD78F2704C54D00FEA36F /* IDeviceService.swift in Sources */,

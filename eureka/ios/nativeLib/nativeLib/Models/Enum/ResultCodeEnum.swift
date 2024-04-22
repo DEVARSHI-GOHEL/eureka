@@ -308,7 +308,7 @@ public enum ResultCodeEnum: String {
 
     // AppSync Success and Intermediate
     case .APPSYNC_COMPLETED: return BleProcStateEnum.NONE
-    case .APPSYNC_ACKNOWLEDGE: return BleProcStateEnum.APP_SYNC_WRITE
+    case .APPSYNC_ACKNOWLEDGE: return BleProcStateEnum.APP_SYNC_READ
 
     case .AUTO_MEASURE_COMPLETED: return BleProcStateEnum.NONE
 

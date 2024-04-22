@@ -533,11 +533,17 @@ public class BleServices {
                 BleServices.setCurrentProcState(BleProcEnum.CONNECT, BleProcStateEnum.FIRMWARE_REVISION_READ);
                 readFirmwareRevision();
                 break;
+            case START_APP_SYNC_READ:
+                ErrorLogger.log("Starting app sync read");
+                BleServices.setCurrentProc(BleProcEnum.CONNECT);
+                BleServices.setCurrentProcState(BleProcEnum.CONNECT, BleProcStateEnum.APP_SYNC_READ);
+                startAppSync(true, false);
+                break;
             case START_APP_SYNC_WRITE:
                 ErrorLogger.log("Starting app sync write");
                 BleServices.setCurrentProc(BleProcEnum.CONNECT);
                 BleServices.setCurrentProcState(BleProcEnum.CONNECT, BleProcStateEnum.APP_SYNC_WRITE);
-                startAppSync(false);
+                startAppSync(false, false);
                 break;
             case START_FIRMWARE_UPDATE:
                 Function1<UpdateResult, Unit> func = result -> {
@@ -1091,7 +1097,7 @@ public class BleServices {
                 break;
             case CALIBRATE:
                 BleServices.setCurrentProcState(BleProcEnum.CALIBRATE, BleProcStateEnum.SET_MEASURE_CALC_AFTER);
-                startAppSync(false);
+                startAppSync(false, false);
                 break;
 
             case CONNECT:
@@ -1862,7 +1868,7 @@ public class BleServices {
 
     public boolean startInstantMeasure() {
         BleServices.setCurrentProcState(BleProcEnum.INSTANT_MEASURE, BleProcStateEnum.SET_MEASURE_CALC_BEFORE);
-        return startAppSync(false) == null;
+        return startAppSync(false, false) == null;
     }
 
     private void readStatusForInstantMeasure() {
@@ -1885,33 +1891,37 @@ public class BleServices {
         }
     }
 
-    public AppSyncResponse startAppSync(boolean isCalculationOff) {
+    public AppSyncResponse startAppSync(boolean isSynRead, boolean isCalculationOff) {
         AppSyncResponse result = null;
         if (_bleDevice == null) {
             result = new AppSyncResponse(ResultCodeEnum.INVALID_DEVICE);
         } else {
-            boolean isQuietMode = BleServices.getCurrentProcState() == BleProcStateEnum.SET_MEASURE_CALC_BEFORE
-                    || BleServices.getCurrentProcState() == BleProcStateEnum.SET_MEASURE_CALC_AFTER;
-            if (!isQuietMode) {
-                stopWeatherService();
-            }
-
-            int mUserId = Global.getUserId();
-            DbAccess dbAccess = DbAccess.getInstance(_context);
-            AppSync settings = dbAccess.getAppSyncData(mUserId);
-            settings.setCalculationOff(isCalculationOff);
-
-            boolean mWriteResult = _bleDevice.writeAppSync(settings.toByteArray());
-            if (mWriteResult) {
-                if (!isQuietMode) {
-                    EventEmittersToReact.getInstance().EmitAppSyncResult(new AppSyncResponse(ResultCodeEnum.APPSYNC_COMPLETED), firmwareRevision);
-                }
+            if (isSynRead) {
+                _bleDevice.readCustomServiceCharacteristic(GattCharEnum.USER_INFO);
             } else {
-                result = new AppSyncResponse(ResultCodeEnum.GATT_WRITE_FAIL);
-            }
+                boolean isQuietMode = BleServices.getCurrentProcState() == BleProcStateEnum.SET_MEASURE_CALC_BEFORE
+                        || BleServices.getCurrentProcState() == BleProcStateEnum.SET_MEASURE_CALC_AFTER;
+                if (!isQuietMode) {
+                    stopWeatherService();
+                }
 
-            if (!isQuietMode) {
-                startWeatherService();
+                int mUserId = Global.getUserId();
+                DbAccess dbAccess = DbAccess.getInstance(_context);
+                AppSync settings = dbAccess.getAppSyncData(mUserId);
+                settings.setCalculationOff(isCalculationOff);
+
+                boolean mWriteResult = _bleDevice.writeAppSync(settings.toByteArray());
+                if (mWriteResult) {
+                    if (!isQuietMode) {
+                        EventEmittersToReact.getInstance().EmitAppSyncResult(new AppSyncResponse(ResultCodeEnum.APPSYNC_COMPLETED), firmwareRevision);
+                    }
+                } else {
+                    result = new AppSyncResponse(ResultCodeEnum.GATT_WRITE_FAIL);
+                }
+
+                if (!isQuietMode) {
+                    startWeatherService();
+                }
             }
         }
         return result;
@@ -1964,7 +1974,7 @@ public class BleServices {
 
     public boolean startCalibration() {
         BleServices.setCurrentProcState(BleProcEnum.CALIBRATE, BleProcStateEnum.SET_MEASURE_CALC_BEFORE);
-        return startAppSync(true) == null;
+        return startAppSync(false, true) == null;
     }
 
     private void readStatusForCalibration() {
@@ -2006,7 +2016,7 @@ public class BleServices {
     public void onMessageEvent(FirmwareRevisionReadEvent event) {
         byte[] mCharData = event.data;
         firmwareRevision = new String(mCharData).split("\0")[0];
-        EventBus.getDefault().post(new NoParamEvent(NoParamEventEnum.START_APP_SYNC_WRITE));
+        EventBus.getDefault().post(new NoParamEvent(NoParamEventEnum.START_APP_SYNC_READ));
 
         if (this.lastMeasureTime > 0) {
             DbAccess.getInstance(_context).reviewOfflineMeasures(this.lastMeasureTime);

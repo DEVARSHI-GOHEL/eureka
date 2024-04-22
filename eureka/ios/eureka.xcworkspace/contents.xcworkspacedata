@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../../../Documents/Project/networkplatform-mobile-app/ios/skinToneDetection/skinToneDetection.xcodeproj">
+      location = "group:detectSkinToneLib/detectSkinToneLib.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:nativeLib/nativeLib.xcodeproj">

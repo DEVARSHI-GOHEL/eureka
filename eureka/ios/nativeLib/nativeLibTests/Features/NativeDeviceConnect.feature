@@ -23,7 +23,6 @@ Feature: The React Native app can connect to LifeLeaf watch
     And watch shall receive current time
     And watch shall receive time zone
     And watch shall receive step goal
-    And characteristic 'STEP_COUNTER' value should be written
     And event with message '523' - 'Step goal updated successfully' should be emitted to the app
     And event with message '199' - 'Watch connected' should be emitted to the app
     And event with message '306' - 'offline data read started' should be emitted to the app
@@ -47,7 +46,7 @@ Feature: The React Native app can connect to LifeLeaf watch
     And characteristic 'STEP_COUNTER' value should be read
     And event with message '305' - 'offline data read complete' should be emitted to the app
     And characteristic 'FIRMWARE_REVISION' value should be read
-    And characteristic 'USER_DATA' value should be written
+    And characteristic 'USER_DATA' value should be read
     And event with message '299' - 'App Sync completed' should be emitted to the app
     And watch shall not receive any command on command characteristic
 

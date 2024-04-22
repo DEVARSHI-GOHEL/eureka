@@ -24,14 +24,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
 import {HeaderBackButton} from '@react-navigation/stack';
 import {useNetInfo} from '@react-native-community/netinfo';
-
+import {RNCamera} from 'react-native-camera';
+import LifePlusModuleExport from '../../../LifePlusModuleExport';
 
 import {Colors, Fonts, Sign_In_Api, Update_User_Api} from '../../Theme';
 import {
   UIButton,
   UIGenericPlaceholder,
   UILoader,
-  UIModal, UIPicker,
+  UIModal,
+  UIPicker,
   UITextInput,
 } from '../../Components/UI';
 import styles from './styles';
@@ -41,7 +43,11 @@ import {appSyncApiKey, refreshTokenApi} from '../../Services/AuthService';
 import {EVENT_MANAGER} from '../../Ble/NativeEventHandler';
 import AppSyncCommandHandler from '../WatchSettingsScreen/AppSyncCommandHandler';
 import {showErrorToast} from '../../Components/UI/UIToast/UIToastHandler';
-import {getErrorMessage, Translate, useTranslation} from '../../Services/Translate';
+import {
+  getErrorMessage,
+  Translate,
+  useTranslation,
+} from '../../Services/Translate';
 import {
   AUTO_MEASURE_STATE,
   USER_REGISTRATION_STATE,
@@ -61,7 +67,8 @@ import {isHeightValid} from './components/HeightComponent/HeightComponent';
 import {IMPERIAL_SYSTEM, KG, POUND, useMeasurement} from './hooks/measurement';
 import WeightComponent from './components/WeightComponent';
 import {useWeight} from './components/WeightComponent/hooks';
-import {t} from "i18n-js";
+import {t} from 'i18n-js';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const ETHNICITY_ARRAY = [
   {id: 1, value: 'ethnicity_1'},
@@ -77,7 +84,6 @@ const ETHNICITY_ARRAY = [
   {id: 43, value: 'ethnicity_43'},
   {id: 75, value: 'ethnicity_75'},
 ];
-
 
 const PersonalInfoScreen = ({navigation, ...props}) => {
   const netInfo = useNetInfo();
@@ -102,6 +108,43 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   const [loaderText, setLoaderText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [patientIdState, setPatientIdState] = useState('');
+
+  const [isCameraReady, setIsCameraReady] = useState(false);
+  const cameraRef = useRef(null);
+
+  useEffect(() => {
+    const checkCamera = async () => {
+      const isReady = await cameraRef.current?.getCamera().isReady();
+      setIsCameraReady(isReady);
+    };
+
+    checkCamera();
+  }, []);
+
+  const takePicture = async () => {
+    if (cameraRef.current && isCameraReady) {
+      try {
+        const options = {quality: 0.5, base64: true};
+        const data = await cameraRef.current.takePictureAsync(options);
+        console.log(data); // Image URI
+        console.log(Object.keys(data));
+
+        // Call the skinToneDetectionMethod
+        // const result = await CustomModule.skinToneDetectionMethod();
+        // console.log("Skin tone detection result:", result);
+
+        // Call the displayImage method
+        const imageResult = await LifePlusModuleExport.displayImage(
+          data.base64,
+        );
+        console.log('Display image result:', imageResult);
+      } catch (error) {
+        console.error('Failed to take picture:', error);
+      }
+    } else {
+      console.warn('Camera is not ready');
+    }
+  };
 
   const {
     heightType,
@@ -390,7 +433,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
     disableText = true;
   }
 
-  const {userId, autoMeasureState} = useSelector((state) => ({
+  const {userId, autoMeasureState} = useSelector(state => ({
     userId: state.auth.userId,
     //  userState: action.auth.userState
     autoMeasureState: state.measure.autoMeasureState,
@@ -423,7 +466,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   const backHandleHeaderDisableFun = () => {
     setIsBackEnable(true); //block user to back press
     navigation.setOptions({
-      headerLeft: (props) => (
+      headerLeft: props => (
         <HeaderBackButton
           {...props}
           onPress={() => {}}
@@ -440,7 +483,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   const backHandleHeaderNormalFun = () => {
     setIsBackEnable(false);
     navigation.setOptions({
-      headerLeft: (props) => {
+      headerLeft: props => {
         return (
           <HeaderBackButton
             {...props}
@@ -465,7 +508,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
     let currentUserState = await AsyncStorage.getItem('user_state');
 
     if (currentUserState == USER_REGISTRATION_STATE.HAS_PASSTHROUGH) {
-      getUserPersonalInfo((__patientId) => {
+      getUserPersonalInfo(__patientId => {
         updateUserPersonalInfo(__patientId, () => {
           navigation.navigate('DeviceRegistrationScreen');
         });
@@ -525,7 +568,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       /**
        * Get response from Api and call async storage
        */
-      .then(async (response) => {
+      .then(async response => {
         console.log('onAddPersonalInfo res', response);
 
         if (response.data.data.addUserInfo.statusCode === 200) {
@@ -661,7 +704,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   /**
    * get user info Api call
    */
-  const getUserPersonalInfo = async (_cb) => {
+  const getUserPersonalInfo = async _cb => {
     let userIdAsync = await AsyncStorage.getItem('user_id');
 
     const getAgreementUserState = prepareAllUserInfoQuery(userIdAsync);
@@ -695,7 +738,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       /**
        * Get response from Api and call async storage
        */
-      .then(async (response) => {
+      .then(async response => {
         if (response.status === 200) {
           setIsLoader(false);
           setLoaderText('');
@@ -790,7 +833,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
           }
         }
       })
-      .catch(async (error) => {
+      .catch(async error => {
         console.log(error.response);
 
         /**
@@ -903,7 +946,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       /**
        * Get response from Api and call async storage
        */
-      .then(async (response) => {
+      .then(async response => {
         console.log('personal info update', response);
         setIsLoader(false);
         setLoaderText('');
@@ -952,7 +995,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
           );
         }
       })
-      .catch(async (error) => {
+      .catch(async error => {
         console.log(error);
 
         /**
@@ -1134,13 +1177,12 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
     );
   }
 
-
-  const onContinue = ()=> {
-    if (continueBtnDisableState){
+  const onContinue = () => {
+    if (continueBtnDisableState) {
       return;
     }
     onAddPersonalInfo();
-  }
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -1160,6 +1202,13 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
               colors={['#A4C8ED']}
             />
           }>
+          <RNCamera
+            ref={cameraRef}
+            style={styles.camera}
+            type={RNCamera.Constants.Type.back}
+            captureAudio={false}
+            onCameraReady={() => setIsCameraReady(true)}
+          />
           <LinearGradient
             start={{x: 0, y: 0}}
             end={{x: 0, y: 0.3}}
@@ -1192,7 +1241,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                     keyboardType={'numeric'}
                     accessibilityLabel="birth-day"
                     error={dayWarning}
-                    onChangeText={(text) => {
+                    onChangeText={text => {
                       if (text.length == 2) {
                         monthRef.current.focus();
                       }
@@ -1213,7 +1262,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                     maxLength={2}
                     error={monthWarning}
                     accessibilityLabel="birth-month"
-                    onChangeText={(text) => {
+                    onChangeText={text => {
                       if (text.length == 2) {
                         yearRef.current.focus();
                       }
@@ -1235,7 +1284,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                     maxLength={4}
                     error={yearWarning}
                     accessibilityLabel="birth-year"
-                    onChangeText={(text) =>
+                    onChangeText={text =>
                       setYear(text.replace(/[- #*$;,.<>\{\}\[\]\\\/\D]/gi, ''))
                     }
                     onBlur={yearValidateFun}
@@ -1249,7 +1298,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                 {contentScreenObj.ethnicity_PickerText}
               </Label>
               <View style={styles.inputPicker} accessibilityLabel="ethnicity">
-                <View accessibilityLabel={'selected-ethnicity-'+ethnicity}>
+                <View accessibilityLabel={'selected-ethnicity-' + ethnicity}>
                   <UIPicker
                     mode="dropdown"
                     style={{width: '99.5%', paddingRight: '.5%'}}
@@ -1266,15 +1315,14 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                     }
                     selectedValue={ethnicity}
                     placeholder={contentScreenObj.selectOne}
-                    onValueChange={(selectedItem) => {
+                    onValueChange={selectedItem => {
                       console.log('selectedItem', selectedItem);
                       if (selectedItem === 'default') {
                         // alert('Please select type')
                       } else {
                         setEthnicity(selectedItem);
                       }
-                    }}
-                  >
+                    }}>
                     <UIPicker.Item
                       label={contentScreenObj.selectOne}
                       value={'default'}
@@ -1298,13 +1346,16 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                 {contentScreenObj.skinTone_PickerText}
               </Label>
               <SkinTonePicker selectedId={skinTone} setSkinTone={setSkinTone} />
+              <TouchableOpacity onPress={takePicture}>
+                <Text>Open Camera</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.inputWrap}>
               <Label style={styles.inputLabel}>
                 {contentScreenObj.gender_PickerText}
               </Label>
               <View style={styles.inputPicker} accessibilityLabel="gender">
-                <View accessibilityLabel={'selected-gender-'+gender}>
+                <View accessibilityLabel={'selected-gender-' + gender}>
                   <UIPicker
                     mode="dialog"
                     style={{width: '99.5%', paddingRight: '.5%'}}
@@ -1321,7 +1372,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                     }
                     selectedValue={gender}
                     placeholder={contentScreenObj.selectOne}
-                    onValueChange={(selectedItem) => {
+                    onValueChange={selectedItem => {
                       console.log('selectedItem', selectedItem);
                       if (selectedItem === 'default') {
                         // alert('Please select type')
@@ -1336,10 +1387,22 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                       value={'default'}
                       color="#999"
                     />
-                    <UIPicker.Item label={contentScreenObj.gender_1} value="M" />
-                    <UIPicker.Item label={contentScreenObj.gender_2} value="F" />
-                    <UIPicker.Item label={contentScreenObj.gender_3} value="O" />
-                    <UIPicker.Item label={contentScreenObj.gender_4} value="D" />
+                    <UIPicker.Item
+                      label={contentScreenObj.gender_1}
+                      value="M"
+                    />
+                    <UIPicker.Item
+                      label={contentScreenObj.gender_2}
+                      value="F"
+                    />
+                    <UIPicker.Item
+                      label={contentScreenObj.gender_3}
+                      value="O"
+                    />
+                    <UIPicker.Item
+                      label={contentScreenObj.gender_4}
+                      value="D"
+                    />
                   </UIPicker>
                 </View>
               </View>
@@ -1363,7 +1426,9 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
               />
             </View>
             <View style={styles.inputWrap}>
-              <Label style={styles.inputLabel}>{contentScreenObj.weight_InputText}</Label>
+              <Label style={styles.inputLabel}>
+                {contentScreenObj.weight_InputText}
+              </Label>
               <WeightComponent
                 {...{
                   setWeightType,
@@ -1373,16 +1438,24 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
               />
             </View>
             <View style={styles.inputWrap}>
-              <Label style={styles.inputLabel}>{contentScreenObj.country_PickerText}</Label>
+              <Label style={styles.inputLabel}>
+                {contentScreenObj.country_PickerText}
+              </Label>
               <View
                 style={styles.inputPicker}
                 accessibilityLabel="country-picker-outer">
-                <View accessibilityLabel={'selected-country-'+listSelectedItem.code}>
+                <View
+                  accessibilityLabel={
+                    'selected-country-' + listSelectedItem.code
+                  }>
                   <UIPicker
                     mode="modal"
                     style={{width: '99.5%', paddingRight: '.5%'}}
                     textStyle={{
-                      color: listSelectedItem.code === 'default' ? '#B3B3B3' : '#000',
+                      color:
+                        listSelectedItem.code === 'default'
+                          ? '#B3B3B3'
+                          : '#000',
                       ...Fonts.fontMedium,
                       paddingLeft: 10,
                     }}
@@ -1394,10 +1467,9 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                     }
                     selectedValue={listSelectedItem.code}
                     placeholder={contentScreenObj.selectOne}
-                    onValueChange={(selected) => {
-                      setListSelectedItem({code:selected})
-                    }}
-                  >
+                    onValueChange={selected => {
+                      setListSelectedItem({code: selected});
+                    }}>
                     <UIPicker.Item
                       label={contentScreenObj.selectOne}
                       value={'default'}
@@ -1414,7 +1486,6 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                       );
                     })}
                   </UIPicker>
-
                 </View>
               </View>
             </View>
@@ -1514,7 +1585,7 @@ async function getUserFromLocalDb() {
     userDetails.ethnicityId = isNaN(thisUser.ethnicity_id)
       ? 1
       : thisUser.ethnicity_id * 1;
-    userDetails.skinToneId = thisUser.skin_tone_id
+    userDetails.skinToneId = thisUser.skin_tone_id;
     userDetails.gender = thisUser.gender_id;
     userDetails.height_ft = (thisUser.height_ft * 1).toString();
     userDetails.height_in = (thisUser.height_in * 1).toString();
@@ -1541,7 +1612,7 @@ async function getEthnicityListFromLocalDb() {
   try {
     let rows = ethnicityData.rows;
 
-    rows.forEach((r) => {
+    rows.forEach(r => {
       ethnicity_list.push({id: r.id * 1, value: r.name});
     });
   } catch (e) {
@@ -1566,7 +1637,7 @@ async function sendSyncCommand(data) {
   let sendSyncCommand = {
     userId: data.id.toString(),
     deviceMsn,
-    autoMeasure: data.auto_measure
+    autoMeasure: data.auto_measure,
   };
   console.log('sendSyncCommand user', sendSyncCommand);
 

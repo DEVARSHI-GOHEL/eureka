@@ -20,6 +20,13 @@ public class StartAppSyncFn: FunctionBase {
       if let currentDevice = ServiceFactory.getDeviceService().currentDevice {
         if let peripheral = currentDevice.peripheral {
             switch DeviceService.currentProcState {
+            case .APP_SYNC_READ:
+                if let errResponse = BleUtil.readCustomCharacteristic(pPeripheral: peripheral, pWhichCharct: GattCharEnum.USER_DATA).response {
+                  result = AppSyncResponse(pResponseBase: errResponse)
+                } else {
+                  result = AppSyncResponse(pErrorCode: ResultCodeEnum.APPSYNC_ACKNOWLEDGE)
+                }
+                break
             case .APP_SYNC_WRITE:
                 if let errResponse = ProcessAppSyncFn(["peripheral" : peripheral], pNewProcState: BleProcStateEnum.APP_SYNC_WRITE).doOperation() as? ResponseBase {
                     result = AppSyncResponse(pResponseBase: errResponse)

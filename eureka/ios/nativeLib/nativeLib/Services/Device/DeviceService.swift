@@ -533,7 +533,7 @@ extension DeviceService: CBPeripheralDelegate {
         case .FIRMWARE_REVISION:
             let end = data.firstIndex(where: { $0 == 0 }) ?? data.endIndex
             firmwareRevision = String(decoding: data[..<end], as: UTF8.self)
-            _ = StartAppSyncFn([:], pNewProc: .CONNECT, pNewProcState: .APP_SYNC_WRITE).doOperation()
+            _ = StartAppSyncFn([:], pNewProc: .CONNECT, pNewProcState: .APP_SYNC_READ).doOperation()
             
             // end of sync
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: {
@@ -542,6 +542,17 @@ extension DeviceService: CBPeripheralDelegate {
               }
               ServiceFactory.getWeatherService()?.startService()
             })
+            
+        case .USER_DATA:
+          switch (mCurrProc) {
+          case .APP_SYNC, .CONNECT:
+            switch (CurProcState) {
+            case .APP_SYNC_READ:
+                _ = ProcessAppSyncFn(["error" : error, "peripheral" : peripheral, "data" : mCharctData, "firmwareRevision": firmwareRevision], pNewProcState: BleProcStateEnum.APP_SYNC_READ).doOperation()
+            default: break
+            }
+          default: break
+          }
         default:
           break
         }

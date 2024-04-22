@@ -8,8 +8,9 @@
 import Foundation
 import nativeLib
 import Firebase
-import skinToneDetection
+import detectSkinToneLib
 
+@available(iOS 15.0, *)
 @objc(LifePlusReactModule)
 class LifePlusReactModule: RCTEventEmitter {
   
@@ -17,7 +18,7 @@ class LifePlusReactModule: RCTEventEmitter {
   private var continueAutomeasures: Bool = false
   private let bleModule = BleModule()
   private let dbModule = DbModule()
-  private let skinTone = SkinToneDetection()
+  private let skinToneModule = SkinToneDetection()
   
   private static var _emitter:EventEmittersToReact? = nil
   
@@ -197,6 +198,6 @@ class LifePlusReactModule: RCTEventEmitter {
   func displayImage(_ base64String: String,
                 resolver resolve: RCTPromiseResolveBlock,
                 rejecter reject: RCTPromiseRejectBlock) {
-      resolve(skinTone.displayImage(base64String))
+      resolve(skinToneModule.displayImage(base64String))
   }
 }

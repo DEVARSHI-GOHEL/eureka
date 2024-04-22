@@ -246,6 +246,36 @@ class Whens {
         CucumberCtx.rawDataIndex = index
     }
 
+    @When("app requests app sync read")
+    fun when_app_requests_app_sync_read() {
+        val promise = mockk<Promise>()
+        val responseSlot = CapturingSlot<String>()
+        every { promise.resolve(capture(responseSlot)) } answers {}
+
+        val json = JSONObject()
+        json.put("userId", CucumberCtx.testUserId.toString())
+        json.put("deviceMsn", "SEQ001")
+        val pRequest = json.toString()
+
+        val context = ReactApplicationContext(
+            InstrumentationRegistry.getInstrumentation().targetContext
+        )
+        DbAccess.getInstance(context).addTestUser(CucumberCtx.testUserId)
+        Global.setUserId(CucumberCtx.testUserId)
+        val method = LifePlusReactModule::class.java.declaredMethods.first { it.name == "appSync" }
+        method.isAccessible = true
+        method.invoke(CucumberCtx.nativeModule, pRequest, promise)
+
+        runBlocking {
+            withTimeoutOrNull(3000) {
+                while (!responseSlot.isCaptured) {
+                    delay(500)
+                }
+                CucumberCtx.promiseResponse = responseSlot.captured
+            }
+        }
+    }
+
     @When("app requests app sync write with params")
     fun when_app_requests_app_sync_write_with_params(data: DataTable) {
         val promise = mockk<Promise>()

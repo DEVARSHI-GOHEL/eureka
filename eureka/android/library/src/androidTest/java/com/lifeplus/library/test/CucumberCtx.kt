@@ -68,6 +68,7 @@ internal class CucumberCtx {
         val updatedDescriptors = mutableListOf<BluetoothGattDescriptor>()
         val readChars = mutableListOf<UUID>()
         val writeChars = mutableListOf<Pair<UUID, ByteArray>>()
+        var autoMeasure = true
         var timeSet = false
         var timeZoneSet = false
         var stepGoalSet = false
@@ -291,6 +292,7 @@ internal class CucumberCtx {
             errorLoggerKeys.clear()
             readChars.clear()
             writeChars.clear()
+            autoMeasure = true
             lastError = null
             updatedDescriptors.clear()
         }
@@ -413,7 +415,8 @@ internal class CucumberCtx {
                 println("Char read: ${slotReadChar.captured.uuid}")
                 when (slotReadChar.captured.uuid) {
                     UUID.fromString(GattCharEnum.USER_INFO.id) -> {
-                        slotReadChar.captured.value = byteArrayOf(1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                        val autoMeasureValue: Byte = if (autoMeasure) 1 else 0
+                        slotReadChar.captured.value = byteArrayOf(autoMeasureValue, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                     }
                     UUID.fromString(GattCharEnum.STATUS.id) -> {
                         slotReadChar.captured.value = byteArrayOf(128.toByte())
