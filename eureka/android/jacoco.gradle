@@ -1,0 +1,58 @@
+apply plugin: 'jacoco'
+
+task testReport(type : JacocoReport) {
+    group       = 'Reporting'
+    description = 'Generate JaCoCo coverage reports'
+
+    def excludes = [
+            'META-INF/**',
+            '**/R.class',
+            '**/R$*.class',
+            '**/*$ViewInjector*.*',
+            '**/*$ViewBinder*.*',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*RealmProxy.*',
+            '**/*ColumnInfo.*',
+            '**/*RealmModule*.*',
+            '**/AutoValue_*.*',
+            '**/Dagger*.*',
+            '**/*Module_Provide*Factory.*',
+            '**/*_Factory.*',
+            '**/*_MembersInjector.*',
+            '**/*_LifecycleAdapter.*'
+    ]
+
+    def sourcesKt = []
+    def classesKt = []
+    def reportsEc = []
+
+    subprojects.each { p ->
+        sourcesKt += "$p.projectDir/src/main/java"
+        classesKt += fileTree(
+                dir      : "$p.buildDir/tmp/kotlin-classes/debug",
+                excludes : excludes
+        )
+        classesKt += fileTree(
+                dir      : "$p.buildDir/intermediates/javac/debug/classes",
+                excludes : excludes
+        )
+        reportsEc += fileTree(
+                dir     : "$p.buildDir",
+                include : [ 'outputs/code_coverage/debugAndroidTest/connected/*coverage.ec' ]
+        )
+        reportsEc += fileTree(
+                dir     : "$p.projectDir",
+                include : [ 'jacoco.exec' ]
+        )
+    }
+
+    sourceDirectories.from = files(sourcesKt)
+    classDirectories.from = classesKt
+    executionData.from = reportsEc
+
+    reports {
+        xml.enabled  = true
+        html.enabled = true
+    }
+}

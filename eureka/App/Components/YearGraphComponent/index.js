@@ -1,0 +1,1 @@
+export {YearGraphComponent} from './YearGraphComponent';

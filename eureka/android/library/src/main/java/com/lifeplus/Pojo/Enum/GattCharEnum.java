@@ -1,0 +1,54 @@
+package com.lifeplus.Pojo.Enum;
+
+public enum GattCharEnum {
+    BATTERY_LEVEL("00002a19-0000-1000-8000-00805f9b34fb", "Battery Level"),
+
+    BP_MEASUREMENT("00002a35-0000-1000-8000-00805f9b34fb", "Blood_Pressure_Measurement"),
+    BP_FEATURE("00002a49-0000-1000-8000-00805f9b34fb", "Blood_Pressure_Feature"),
+
+    CGM_FEATURE("00002aa8-0000-1000-8000-00805f9b34fb", "CGM_Feature"),
+    CGM_SESSION_RUNTIME("00002aab-0000-1000-8000-00805f9b34fb", "CGM_Session_Run_Time"),
+    CGM_SESSION_START_TIME("00002aaa-0000-1000-8000-00805f9b34fb", "CGM_Session_Start_Time"),
+    TIME_OFFSET("00002aa9-0000-1000-8000-00805f9b34fb", "Time_Offset"),
+    CGM_MEASUREMENT("00002aa7-0000-1000-8000-00805f9b34fb", "CGM_Measurement"),
+    RECORD_ACCESS_CONTROL_POINT_GLUCO("00002a52-0000-1000-8000-00805f9b34fb", "Record_Access_Control_Point_Gluco"),
+    CGM_SPECIFIC_OPS_CONTOL_POINT("00002aac-0000-1000-8000-00805f9b34fb", "CGM_Specific_Ops_Control_Point"),
+    CURRENT_TIME("00002a2b-0000-1000-8000-00805f9b34fb", "Current_Time"),
+    LOCAL_TIME_INFORMATION("00002a0f-0000-1000-8000-00805f9b34fb", "Local_Time_Information"),
+    PLX_SPOT_CHECK_MEASUREMENT("00002a5e-0000-1000-8000-00805f9b34fb", "PLX_Spot_check_Measurement"),
+    PLX_FEATURES("00002a60-0000-1000-8000-00805f9b34fb", "PLX_Features"),
+    RECORD_ACCESS_CONTROL_POINT_OXY("00002a52-0000-1000-8000-00805f9b34fb", "Record_Access_Control_Point_Oxy"),
+    STATUS("4C505732-5F43-535F-5354-415455530000", "Status"),
+    COMMAND("4C505732-5F43-535F-434F-4D4D414E4400", "Command"),
+    VITAL_DATA("4C505732-5F43-535F-5644-5F5245430000", "VitalData"),
+    RAW_DATA("4C505732-5F43-535F-5244-5F5245430000", "RawData"),
+    LAST_MEASURE_TIME("4C505732-5F43-535F-5244-5F54494D4500", "Last_Measure_Time"),
+    MEAL_DATA("4C505732-5F43-535F-4D44-5F5245430000", "Meal_Data"),
+    BOUNDS("4C505732-5F43-535F-424F-554E44530000", "Bounds"),
+    USER_INFO("4C505732-5F43-535F-5553-45525F494600", "User_Info"),
+    STEP_COUNTER("4C505732-5F43-535F-5354-45505F435400", "Step_Counter"),
+    ML_UPDATE("4C505732-5F43-535F-4D4C-5F5550440000", "MLUpdate"),
+    NOTIFICATIONS("4C505732-5F43-535F-4E4F-544946494353", "Notifications"),
+    WEATHER("4C505732-5F43-535F-5745-415448455200","Weather"),
+    ALERT_LEVEL("00002A06-0000-1000-8000-00805f9b34fb","Alert level"),
+    FIRMWARE_REVISION("00002A26-0000-1000-8000-00805F9B34FB", "Firmware revision"),
+    REFERENCE_VITAL_DATA("4C505732-5F43-535F-5245-465F56440000", "Reference vital data");
+
+
+
+    private final String _id;
+    private final String _desc;
+
+    GattCharEnum(String pId, String pDesc) {
+        _id = pId;
+        _desc = pDesc;
+    }
+
+    public String getId() {
+        return _id;
+    }
+
+    public String getDesc() {
+        return _desc;
+    }
+}

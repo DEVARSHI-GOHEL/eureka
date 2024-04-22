@@ -1,0 +1,127 @@
+# Bitbucket Pipelines Template to build, test your Android Application.
+
+# For more details see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
+
+# Docker for Android SDK 31 with pre-installed build tools and emulator image.
+# Note: This docker image is created and maintained by a non official third party. For more details see: https://hub.docker.com/r/androidsdk/android-31
+image: androidsdk/android-31
+
+pipelines:
+  default:
+    - step:
+        name: NPM dependencies
+        image: node:16.20.2
+        caches:
+          - node-modules
+        script:
+          - cd eureka
+          - npm install --legacy-peer-deps
+    - step:
+        name: KtLint and Unit tests (libraries only)
+        caches:
+          - gradle
+          - gradle-wrapper
+          - node-modules
+        script:
+          - JAVA_OPTS="-Xmx2048m -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+          - chmod +x ./install_node_linux.sh
+          - ./install_node_linux.sh
+          - cd eureka/android
+          - ./gradlew ktlint
+          - ./gradlew uploader:test library:test
+        artifacts:
+          - eureka/android/library/build/reports/tests/**
+          # test reporting is automatically enabled https://support.atlassian.com/bitbucket-cloud/docs/test-reporting-in-pipelines/
+  pull-requests:
+    '**':
+      - step:
+          name: NPM dependencies
+          image: node:16.20.2
+          caches:
+            - node-modules
+          script:
+            - cd eureka
+            - npm install --legacy-peer-deps
+      - step:
+          name: Lint check
+          caches:
+            - gradle
+            - gradle-wrapper
+            - node-modules
+          script:
+            - apt-get clean && apt-get update -qq && apt-get install -qq -y apt-utils locales
+            - locale-gen $LANG
+            - JAVA_OPTS="-Xmx2048m -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+            - chmod +x ./install_node_linux.sh
+            - ./install_node_linux.sh
+            - cd eureka/android
+            - ./gradlew lintRelease
+          artifacts:
+            - eureka/android/app/build/reports/lint-results-release.html
+            - eureka/android/library/build/reports/lint-results-release.html
+      # TODO: add integration tests
+  branches:
+    main:
+      - step:
+          name: NPM dependencies
+          image: node:16.20.2
+          caches:
+            - node-modules
+          script:
+            - cd eureka
+            - npm install --legacy-peer-deps
+      - step:
+          name: Release STG build
+          caches:
+            - gradle
+            - gradle-wrapper
+            - node-modules
+          script:
+            - apt-get clean && apt-get update -qq && apt-get install -qq -y apt-utils locales
+            - locale-gen $LANG
+            - JAVA_OPTS="-Xmx2048m -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+            - chmod +x ./install_node_linux.sh
+            - ./install_node_linux.sh
+            - cd eureka/android
+            - ./gradlew assembleRelease
+          artifacts:
+            - eureka/android/app/build/outputs/**
+
+    production:
+      - step:
+          name: NPM dependencies
+          image: node:16.20.2
+          caches:
+            - node-modules
+          script:
+            - cd eureka
+            - npm install --legacy-peer-deps
+      - step:
+          name: Release PRD build
+          caches:
+            - gradle
+            - gradle-wrapper
+            - node-modules
+          script:
+            - apt-get clean && apt-get update -qq && apt-get install -qq -y apt-utils locales
+            - locale-gen $LANG
+            - JAVA_OPTS="-Xmx2048m -XX:MaxPermSize=2048m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+            - chmod +x ./install_node_linux.sh
+            - ./install_node_linux.sh
+            - sed -i "s/env = 'stage/env = 'prod/g" ./eureka/App/Theme/Constant/Constant.js
+            - cat eureka/App/Theme/Constant/Constant.js
+            - cd eureka/android
+            - chmod +x ./build_release_and_deploy.sh
+            - ./build_release_and_deploy.sh
+          artifacts:
+            - eureka/android/app/build/outputs/**
+
+definitions:
+  caches:
+    node-modules:
+      key:
+        files:
+          - eureka/package.json
+      path: eureka/node_modules
+    gradle-wrapper: ~/.gradle/wrapper
+#    android-emulator: $ANDROID_HOME/system-images/android-30

@@ -1,0 +1,1 @@
+export { MonthGraphComponent } from './MonthGraphComponent';

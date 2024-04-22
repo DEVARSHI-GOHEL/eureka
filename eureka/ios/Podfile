@@ -1,0 +1,50 @@
+source 'https://github.com/CocoaPods/Specs.git'
+workspace 'eureka.xcworkspace'
+platform :ios, '13.6'
+
+# Override Firebase SDK Version
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+target 'eureka' do
+
+  config = use_native_modules!
+
+  pod 'Firebase/Crashlytics'
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => true
+  )
+
+  target 'eurekaTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+  use_flipper!({ 'Flipper' => '0.93.0' })
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.respond_to?(:product_type) and target.product_type == "com.apple.product-type.bundle"
+        target.build_configurations.each do |config|
+            config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+        end
+      end
+    end
+  end
+end
+
+target 'nativeLib' do
+  use_frameworks! :linkage => :static
+  project 'nativeLib/nativeLib.xcodeproj'
+  # GRDB 5 with SQLCipher 4
+  pod 'GRDB.swift/SQLCipher', '~> 5.0'
+  pod 'SQLCipher', '~> 4.0', :modular_headers => true
+
+  target 'nativeLibTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end

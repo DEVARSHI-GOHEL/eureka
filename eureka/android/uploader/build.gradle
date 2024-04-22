@@ -1,0 +1,97 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+configurations {
+    ktlint
+}
+
+android {
+    namespace 'com.lifeplus.lifeleaf.uploader'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        archivesBaseName = "lifeleaf-uploader-${versionName}"
+
+        testInstrumentationRunner "com.lifeplus.lifeleaf.uploader.test.runner.CucumberTestRunner"
+        //testInstrumentationRunnerArguments cucumberUseAndroidJUnitRunner: 'true'
+        buildConfigField 'String', 'TEST_TAGS', '"' + getTestTags() + '"'
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+    testOptions.unitTests {
+        returnDefaultValues = true
+        all {
+            testLogging {
+                events TestLogEvent.FAILED,
+                        TestLogEvent.PASSED,
+                        TestLogEvent.SKIPPED,
+                        TestLogEvent.STANDARD_OUT,
+                        TestLogEvent.STANDARD_ERROR
+                exceptionFormat TestExceptionFormat.FULL
+                showExceptions true
+                showCauses true
+                showStackTraces true
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "io.mockk:mockk:$mockkVersion"
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation "io.cucumber:cucumber-android:$cucumberVersion"
+    androidTestImplementation "io.mockk:mockk-android:$mockkVersion"
+
+    ktlint "com.pinterest:ktlint:$ktlintVersion"
+}
+
+// make ./gradlew ktlint for checking
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt"
+}
+check.dependsOn ktlint //Attach to ./gradlew check as well.
+// make ./gradlew ktlintFormat for check and auto fix
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
+}
+
+def getTestTags() {
+    return project.hasProperty("tags") ? project.getProperties().get("tags") : ""
+}
+

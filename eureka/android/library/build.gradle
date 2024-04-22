@@ -1,0 +1,94 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+configurations {
+    ktlint
+}
+
+android {
+    namespace 'com.lifeplus.library'
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        testInstrumentationRunner "com.lifeplus.library.test.runner.CucumberTestRunner"
+//        testInstrumentationRunnerArguments cucumberUseAndroidJUnitRunner: 'true'
+        buildConfigField 'String', 'TEST_TAGS', '"' + getTestTags() + '"'
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    packagingOptions {
+        jniLibs {
+            excludes += ['META-INF/*']
+        }
+        resources {
+            excludes += ['META-INF/*']
+        }
+    }
+    lint {
+        disable 'Range', 'MissingPermission'
+    }
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'androidx.annotation:annotation:1.7.1'
+    implementation 'androidx.work:work-runtime-ktx:2.8.1' // 2.9.0 requires SDK 34
+    implementation project(path: ':uploader')
+
+    implementation "com.facebook.react:react-native:0.67.5"
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.4'
+    implementation "androidx.sqlite:sqlite:2.3.1" // 2.4.0 requires SDK 34
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "io.mockk:mockk:$mockkVersion"
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation "io.cucumber:cucumber-android:$cucumberVersion"
+    androidTestImplementation "io.mockk:mockk-android:$mockkVersion"
+    androidTestImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0'
+
+    ktlint "com.pinterest:ktlint:$ktlintVersion"
+}
+
+// make ./gradlew ktlint for checking
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "src/**/*.kt"
+}
+check.dependsOn ktlint //Attach to ./gradlew check as well.
+// make ./gradlew ktlintFormat for check and auto fix
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
+}
+
+def getTestTags() {
+    return project.hasProperty("tags") ? project.getProperties().get("tags") : ""
+}
