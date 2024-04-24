@@ -51,6 +51,7 @@
 		C776F0DC248E70CB00D30932 /* Rajdhani-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C776F0D7248E70CB00D30932 /* Rajdhani-Bold.ttf */; };
 		C7D4409725DA781500B96028 /* RequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D4409525DA781500B96028 /* RequestStatus.swift */; };
 		E172717B378B44F08390E836 /* NotoSansJP-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13FF089746B540B4A158A18B /* NotoSansJP-Bold.ttf */; };
+		E452B86E2BD901150063CD1A /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -475,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E452B86E2BD901150063CD1A /* main.jsbundle in Resources */,
 				C776F0DB248E70CB00D30932 /* Rajdhani-SemiBold.ttf in Resources */,
 				444B3CD227467115009BCB15 /* GoogleService-Info.plist in Resources */,
 				C776F0D9248E70CB00D30932 /* Rajdhani-Light.ttf in Resources */,
@@ -582,6 +584,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-eureka-eurekaTests/Pods-eureka-eurekaTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities/GoogleUtilities_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -605,6 +608,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleUtilities_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNCAsyncStorage_resources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
@@ -692,6 +696,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-eureka/Pods-eureka-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities/GoogleUtilities_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -715,6 +720,7 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleUtilities_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNCAsyncStorage_resources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",

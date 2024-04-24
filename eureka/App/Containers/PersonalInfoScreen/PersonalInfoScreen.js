@@ -69,6 +69,7 @@ import WeightComponent from './components/WeightComponent';
 import {useWeight} from './components/WeightComponent/hooks';
 import {t} from 'i18n-js';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import CameraComponent from '../../Components/Camera/CameraComponent';
 
 const ETHNICITY_ARRAY = [
   {id: 1, value: 'ethnicity_1'},
@@ -1184,6 +1185,12 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
     onAddPersonalInfo();
   };
 
+  if (isCameraReady) {
+    return (
+      <CameraComponent handleCloseCamera={() => setIsCameraReady(false)} />
+    );
+  }
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       {isLoader && <UILoader title={loaderText} />}
@@ -1202,13 +1209,6 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
               colors={['#A4C8ED']}
             />
           }>
-          <RNCamera
-            ref={cameraRef}
-            style={styles.camera}
-            type={RNCamera.Constants.Type.back}
-            captureAudio={false}
-            onCameraReady={() => setIsCameraReady(true)}
-          />
           <LinearGradient
             start={{x: 0, y: 0}}
             end={{x: 0, y: 0.3}}
@@ -1345,11 +1345,30 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
               <Label style={styles.inputLabel}>
                 {contentScreenObj.skinTone_PickerText}
               </Label>
-              <SkinTonePicker selectedId={skinTone} setSkinTone={setSkinTone} />
-              <TouchableOpacity onPress={takePicture}>
-                <Text>Open Camera</Text>
-              </TouchableOpacity>
+              <View style={styles.skinTypeView}>
+                <SkinTonePicker
+                  selectedId={skinTone}
+                  setSkinTone={setSkinTone}
+                />
+                <Text style={styles.fontStyleST}>
+                  No Skin Tone selected yet
+                </Text>
+                <UIButton
+                  style={[GlobalStyle.WrapForSlinglebttn]}
+                  mode="contained"
+                  accessibilityLabel="logout-ok"
+                  labelStyle={{...Fonts.fontSemiBold}}
+                  onPress={() => {
+                    setIsCameraReady(true);
+                  }}>
+                  Select your Skin Tone
+                </UIButton>
+                <Text style={[styles.fontStyleST, styles.infoUnderlineText]}>
+                  Learn how to select your Skin Tone
+                </Text>
+              </View>
             </View>
+
             <View style={styles.inputWrap}>
               <Label style={styles.inputLabel}>
                 {contentScreenObj.gender_PickerText}

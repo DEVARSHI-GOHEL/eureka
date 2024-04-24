@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152E81D8271A7B0ADF1B6EED /* Pods_detectSkinToneLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9730481053321B35A9AB844 /* Pods_detectSkinToneLib.framework */; };
+		5317E3789974B583F8F76204 /* Pods_detectSkinToneLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ACA1F37905D0AA58A60ADB4 /* Pods_detectSkinToneLibTests.framework */; };
 		8F1698662BD6667A00163BFD /* detectSkinToneLib.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8F1698652BD6667A00163BFD /* detectSkinToneLib.docc */; };
 		8F16986C2BD6667A00163BFD /* detectSkinToneLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F1698612BD6667A00163BFD /* detectSkinToneLib.framework */; };
 		8F1698712BD6667A00163BFD /* detectSkinToneLibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1698702BD6667A00163BFD /* detectSkinToneLibTests.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6376C2B0CEB2E12BA8E3558C /* Pods-detectSkinToneLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-detectSkinToneLib.release.xcconfig"; path = "Target Support Files/Pods-detectSkinToneLib/Pods-detectSkinToneLib.release.xcconfig"; sourceTree = "<group>"; };
+		7F0C376AED1A99C03C1FDC82 /* Pods-detectSkinToneLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-detectSkinToneLib.debug.xcconfig"; path = "Target Support Files/Pods-detectSkinToneLib/Pods-detectSkinToneLib.debug.xcconfig"; sourceTree = "<group>"; };
 		8F1698612BD6667A00163BFD /* detectSkinToneLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = detectSkinToneLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F1698642BD6667A00163BFD /* detectSkinToneLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = detectSkinToneLib.h; sourceTree = "<group>"; };
 		8F1698652BD6667A00163BFD /* detectSkinToneLib.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = detectSkinToneLib.docc; sourceTree = "<group>"; };
@@ -35,6 +39,10 @@
 		8F16987B2BD6669500163BFD /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		8F16987C2BD6669500163BFD /* SkinToneDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinToneDetection.swift; sourceTree = "<group>"; };
 		8F16987D2BD6669800163BFD /* FCNResNet101.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = FCNResNet101.mlpackage; sourceTree = "<group>"; };
+		9ACA1F37905D0AA58A60ADB4 /* Pods_detectSkinToneLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_detectSkinToneLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9730481053321B35A9AB844 /* Pods_detectSkinToneLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_detectSkinToneLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB36CDAF2610E365995E627F /* Pods-detectSkinToneLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-detectSkinToneLibTests.debug.xcconfig"; path = "Target Support Files/Pods-detectSkinToneLibTests/Pods-detectSkinToneLibTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D33F356909338125A53C9DF3 /* Pods-detectSkinToneLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-detectSkinToneLibTests.release.xcconfig"; path = "Target Support Files/Pods-detectSkinToneLibTests/Pods-detectSkinToneLibTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				152E81D8271A7B0ADF1B6EED /* Pods_detectSkinToneLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,18 +59,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F16986C2BD6667A00163BFD /* detectSkinToneLib.framework in Frameworks */,
+				5317E3789974B583F8F76204 /* Pods_detectSkinToneLibTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0177895AB80CA836BFBD47E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B9730481053321B35A9AB844 /* Pods_detectSkinToneLib.framework */,
+				9ACA1F37905D0AA58A60ADB4 /* Pods_detectSkinToneLibTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		469D1872E795B1E221C59141 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F0C376AED1A99C03C1FDC82 /* Pods-detectSkinToneLib.debug.xcconfig */,
+				6376C2B0CEB2E12BA8E3558C /* Pods-detectSkinToneLib.release.xcconfig */,
+				CB36CDAF2610E365995E627F /* Pods-detectSkinToneLibTests.debug.xcconfig */,
+				D33F356909338125A53C9DF3 /* Pods-detectSkinToneLibTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
+			sourceTree = "<group>";
+		};
 		8F1698572BD6667A00163BFD = {
 			isa = PBXGroup;
 			children = (
 				8F1698632BD6667A00163BFD /* detectSkinToneLib */,
 				8F16986F2BD6667A00163BFD /* detectSkinToneLibTests */,
 				8F1698622BD6667A00163BFD /* Products */,
+				469D1872E795B1E221C59141 /* Pods */,
+				0177895AB80CA836BFBD47E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +145,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F1698752BD6667A00163BFD /* Build configuration list for PBXNativeTarget "detectSkinToneLib" */;
 			buildPhases = (
+				FC28633A4E9965EC1B7333A2 /* [CP] Check Pods Manifest.lock */,
 				8F16985C2BD6667A00163BFD /* Headers */,
 				8F16985D2BD6667A00163BFD /* Sources */,
 				8F16985E2BD6667A00163BFD /* Frameworks */,
@@ -130,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F1698782BD6667A00163BFD /* Build configuration list for PBXNativeTarget "detectSkinToneLibTests" */;
 			buildPhases = (
+				DCB33A4A45DE86C336346F2B /* [CP] Check Pods Manifest.lock */,
 				8F1698672BD6667A00163BFD /* Sources */,
 				8F1698682BD6667A00163BFD /* Frameworks */,
 				8F1698692BD6667A00163BFD /* Resources */,
@@ -197,6 +232,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DCB33A4A45DE86C336346F2B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-detectSkinToneLibTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC28633A4E9965EC1B7333A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-detectSkinToneLib-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8F16985D2BD6667A00163BFD /* Sources */ = {
@@ -356,6 +438,7 @@
 		};
 		8F1698762BD6667A00163BFD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F0C376AED1A99C03C1FDC82 /* Pods-detectSkinToneLib.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -387,6 +470,7 @@
 		};
 		8F1698772BD6667A00163BFD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6376C2B0CEB2E12BA8E3558C /* Pods-detectSkinToneLib.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -418,6 +502,7 @@
 		};
 		8F1698792BD6667A00163BFD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB36CDAF2610E365995E627F /* Pods-detectSkinToneLibTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -434,6 +519,7 @@
 		};
 		8F16987A2BD6667A00163BFD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D33F356909338125A53C9DF3 /* Pods-detectSkinToneLibTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

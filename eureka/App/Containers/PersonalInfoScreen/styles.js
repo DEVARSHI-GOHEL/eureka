@@ -1,140 +1,140 @@
-import { StyleSheet, Platform } from 'react-native';
-import { Colors, Fonts, Spacer, Alignment, Border } from '../../Theme';
+import {StyleSheet, Platform} from 'react-native';
+import {Colors, Fonts, Spacer, Alignment, Border} from '../../Theme';
 
 export default StyleSheet.create({
   mainContainer: {
     ...Alignment.fill,
-    backgroundColor:Colors.white
+    backgroundColor: Colors.white,
   },
-  mainScrollView:{
+  mainScrollView: {
     ...Alignment.fill,
-    backgroundColor:Colors.white
+    backgroundColor: Colors.white,
   },
-  gradientContainer:{
+  gradientContainer: {
     ...Alignment.fill,
-    ...Spacer.horizontalPadding
+    ...Spacer.horizontalPadding,
   },
-  createAccHeading:{
+  createAccHeading: {
     ...Fonts.fontBold,
     ...Fonts.h4,
-    marginTop:25,
-    marginBottom:8,
+    marginTop: 25,
+    marginBottom: 8,
   },
-  subHeading:{
+  subHeading: {
     ...Fonts.h2,
     ...Fonts.fontMedium,
   },
-  iconsRightText:{
-    fontSize:18,
-    color:'#7f7e7e',
+  iconsRightText: {
+    fontSize: 18,
+    color: '#7f7e7e',
   },
-  iconsRightTextWeight:{
-    fontSize:17,
-    color:'#7f7e7e',
+  iconsRightTextWeight: {
+    fontSize: 17,
+    color: '#7f7e7e',
   },
-  inputLabel:{
+  inputLabel: {
     ...Fonts.fontSemiBold,
     ...Fonts.h3,
-    marginBottom:5,
+    marginBottom: 5,
   },
-  countryLabel:{
+  countryLabel: {
     ...Fonts.fontSemiBold,
     ...Fonts.h3,
-    color:'#605E5E',
-    flex:1,
+    color: '#605E5E',
+    flex: 1,
   },
-  inputPicker2:{
+  inputPicker2: {
     ...Fonts.fontSemiBold,
     ...Fonts.h3,
   },
-  countrydropIcon:{
-    color:'#605E5E',
-    fontSize:10,
-    justifyContent:'flex-end'
+  countrydropIcon: {
+    color: '#605E5E',
+    fontSize: 10,
+    justifyContent: 'flex-end',
   },
-  pickerList:{
+  pickerList: {
     paddingHorizontal: 10,
     paddingVertical: 12,
     borderBottomColor: '#E4EAEC',
     borderBottomWidth: 1,
   },
-  pickerText:{
+  pickerText: {
     ...Fonts.fontMedium,
     ...Fonts.h2,
   },
-  countryPickerWrap:{
-    borderWidth:1,
-    borderColor:'#c8c8c8',
-    paddingVertical:15,
-    paddingLeft:10,
-    paddingRight:24,
-    marginBottom:20,
+  countryPickerWrap: {
+    borderWidth: 1,
+    borderColor: '#c8c8c8',
+    paddingVertical: 15,
+    paddingLeft: 10,
+    paddingRight: 24,
+    marginBottom: 20,
   },
-  countrypicker:{
-    backgroundColor:Colors.white,
+  countrypicker: {
+    backgroundColor: Colors.white,
     // height:40,
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  Countrytext:{
-    color:'#605E5E',
+  Countrytext: {
+    color: '#605E5E',
     ...Fonts.fontSemiBold,
     ...Fonts.h3,
   },
-  inputPicker:{
+  inputPicker: {
     ...Platform.select({
       ios: {
-        backgroundColor:'#fff',
-        paddingVertical:2,
-        marginBottom:15,
-        borderTopWidth:1,
-        borderLeftWidth:1,
-        borderRightWidth:1,
-        borderBottomWidth:1,
-        borderColor:'#c8c8c8',
-        borderRadius:2,
+        backgroundColor: '#fff',
+        paddingVertical: 2,
+        marginBottom: 15,
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: '#c8c8c8',
+        borderRadius: 2,
       },
       android: {
-        backgroundColor:'#fff',
-        paddingVertical:0,
-        paddingHorizontal:10,
-        marginBottom:15,
-        borderTopWidth:1,
-        borderLeftWidth:1,
-        borderRightWidth:1,
-        borderBottomWidth:1,
-        borderColor:'#c8c8c8',
-        borderRadius:2,
-        flex:1
-      }
-    })
+        backgroundColor: '#fff',
+        paddingVertical: 0,
+        paddingHorizontal: 10,
+        marginBottom: 15,
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: '#c8c8c8',
+        borderRadius: 2,
+        flex: 1,
+      },
+    }),
   },
-  weightTab:{
-    flexDirection:'row',
-    backgroundColor:'#ebeff3',
-    borderWidth:1,
-    borderColor:'#c8c8c8',
-    borderRadius:3,
-    marginBottom:10,
+  weightTab: {
+    flexDirection: 'row',
+    backgroundColor: '#ebeff3',
+    borderWidth: 1,
+    borderColor: '#c8c8c8',
+    borderRadius: 3,
+    marginBottom: 10,
   },
-  lbBttn:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
+  lbBttn: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  kgBttn:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
+  kgBttn: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  bttnText:{
-    flex:1,
-    fontSize:15,
-    paddingVertical:5,
-    alignSelf:'center',
+  bttnText: {
+    flex: 1,
+    fontSize: 15,
+    paddingVertical: 5,
+    alignSelf: 'center',
   },
-  buttonSelectedLeft:{
+  buttonSelectedLeft: {
     backgroundColor: '#fff',
     flex: 1,
     width: '100%',
@@ -144,7 +144,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 3,
     borderBottomRightRadius: 3,
   },
-  buttonSelectedRight:{
+  buttonSelectedRight: {
     backgroundColor: '#fff',
     flex: 1,
     width: '100%',
@@ -158,50 +158,69 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    borderTopColor: '#D2D3D6'
+    borderTopColor: '#D2D3D6',
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
   openButton: {
-    backgroundColor: "#F194FF",
+    backgroundColor: '#F194FF',
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: 'center',
   },
-  warnText:{
+  warnText: {
     ...Fonts.sub,
     ...Fonts.fontMedium,
-    color:Colors.red,
-    marginBottom:10,
+    color: Colors.red,
+    marginBottom: 10,
     // paddingRight:20,
-    flexShrink: 1
-  }
-})
+    flexShrink: 1,
+  },
+  skinTypeView: {
+    backgroundColor: Colors.skinToneViewBg,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: Colors.skinToneViewBorder,
+    borderRadius: 3,
+    paddingHorizontal: 30,
+    marginBottom: 10,
+  },
+  fontStyleST: {
+    ...Fonts.fontMedium,
+    textAlign: 'center',
+    marginVertical: 8,
+  },
+  infoUnderlineText: {
+    textDecorationLine: 'underline',
+    textDecorationColor: Colors.blue,
+    color: Colors.blue,
+  },
+});

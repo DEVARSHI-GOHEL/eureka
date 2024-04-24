@@ -57,6 +57,8 @@
 	<string>Location is required to receive local weather data on the smart watch</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Access is needed for selecting a profile picture</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Access to microphone is needed for camera</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

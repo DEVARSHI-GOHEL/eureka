@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import {styles} from './SkinTonePicker.styles';
 
-export const SKIN_TONE_DUMMY_ID= -1 ;
+export const SKIN_TONE_DUMMY_ID = -1;
 
 const SKIN_TONES = [
   {id: 1, color: '#F0E5CA'},
@@ -14,7 +14,8 @@ const SKIN_TONES = [
 ];
 
 // TODO: this should be tested, but jest is not configured now.
-export const isValidSkinToneId = (id) => (0 <= SKIN_TONES.findIndex(skinToneItem => skinToneItem.id == id));
+export const isValidSkinToneId = id =>
+  0 <= SKIN_TONES.findIndex(skinToneItem => skinToneItem.id == id);
 
 /**
  *
@@ -26,26 +27,29 @@ export const isValidSkinToneId = (id) => (0 <= SKIN_TONES.findIndex(skinToneItem
 const SkinTonePicker = ({selectedId, setSkinTone}) => {
   return (
     <View style={styles.container}>
-      {SKIN_TONES.map((skinTone) => (
+      {SKIN_TONES.map(skinTone => (
         <View key={`skin-tone-${skinTone.id}`} style={styles.itemContainer}>
-          <TouchableOpacity
+          <View
             key={`skin-tone-touch-${skinTone.id}`}
-            testID={`skin-tone-touch-${skinTone.id} ${skinTone.id == selectedId ? 'selected':''}`}
-            onPress={() => {
-              setSkinTone?.(skinTone.id);
-            }}
+            testID={`skin-tone-touch-${skinTone.id} ${
+              skinTone.id == selectedId ? 'selected' : ''
+            }`}
+            // onPress={() => {
+            //   setSkinTone?.(skinTone.id);
+            // }}
             accessible={false}>
             <View
-                accessibilityLabel={`skin-tone-touch-${skinTone.id} ${skinTone.id == selectedId ? 'selected':''}`}
-                style={[
+              accessibilityLabel={`skin-tone-touch-${skinTone.id} ${
+                skinTone.id == selectedId ? 'selected' : ''
+              }`}
+              style={[
                 styles.itemColorContent,
-                skinTone.id == selectedId ? styles.itemColorContentSelected : null,
                 {
                   backgroundColor: skinTone.color,
                 },
               ]}
             />
-          </TouchableOpacity>
+          </View>
         </View>
       ))}
     </View>

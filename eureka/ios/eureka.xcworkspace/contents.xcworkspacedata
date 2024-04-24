@@ -5,10 +5,10 @@
       location = "group:detectSkinToneLib/detectSkinToneLib.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:nativeLib/nativeLib.xcodeproj">
+      location = "group:eureka.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:eureka.xcodeproj">
+      location = "group:nativeLib/nativeLib.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
