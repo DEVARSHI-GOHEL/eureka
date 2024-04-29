@@ -772,6 +772,8 @@
   "allScreenTitle": {
     "accInfo_title": "アカウント情報",
     "personalInfo_title": "個人情報",
+    "STInfo_title": "肌の色の選択方法",
+    "selectSkinTone": "肌のトーンを選択",
     "medicalInfo_title": "パーソナル医的情報",
     "contact_title": "連絡先",
     "addContact_title": "連絡先の追加",

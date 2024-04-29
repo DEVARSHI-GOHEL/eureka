@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
-import {Image, Modal, Platform, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Modal,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 //Icon Url
 import AntIcon from 'react-native-vector-icons/AntDesign';
@@ -31,6 +38,8 @@ import SignInScreen from '../Containers/SignInScreen';
 import TermConditionScreen from '../Containers/TermConditionScreen';
 import AccountInfoScreen from '../Containers/AccountInfoScreen';
 import PersonalInfoScreen from '../Containers/PersonalInfoScreen';
+import IntroScreen from '../Containers/PersonalInfoScreen/components/SkinDetectionIntro/index';
+import CameraComponent from '../Components/Camera';
 import MedicalInfoScreen from '../Containers/MedicalInfoScreen';
 import ContactsScreen from '../Containers/ContactsScreen';
 import AddContactScreen from '../Containers/AddContactScreen';
@@ -72,9 +81,17 @@ import {Translate, useTranslation} from '../Services/Translate';
 import {WatchSyncComponent} from '../Components/WatchSyncComponent';
 import {WatchChargerComponent} from '../Components/WatchChargerComponent';
 import {useDispatch, useSelector} from 'react-redux';
-import {INSTANT_CALIBRATE_STATE, OFFLINE_SYNC_STATE, WATCH_CONNECTION_STATE,} from '../constants/AppDataConstants';
+import {
+  INSTANT_CALIBRATE_STATE,
+  OFFLINE_SYNC_STATE,
+  WATCH_CONNECTION_STATE,
+} from '../constants/AppDataConstants';
 
-import {watchConnectPopupAction, watchSyncAction, watchWornPopupAction,} from '../Containers/HomeScreen/action';
+import {
+  watchConnectPopupAction,
+  watchSyncAction,
+  watchWornPopupAction,
+} from '../Containers/HomeScreen/action';
 
 //Common Style
 import {Colors, Fonts} from '../Theme';
@@ -82,21 +99,20 @@ import GlobalStyle from '../Theme/GlobalStyle';
 
 import store from '../../store/store';
 
-import AlertStackScreen from "./components/AlertStackScreen/AlertStackScreen";
-import {styles} from "./AppNavigator.styles";
-import UpdateScreensFlow from "../Containers/FirmwareUpdateScreen/components/UpdateScreensFlow/UpdateScreensFlow";
-import {navigationRef} from "./NavigationService";
-import AccountRemoveScreen from "../Containers/AccountRemoveScreen/AccountRemoveScreen";
-import AccountRemoveProgressScreen from "../Containers/AccountRemoveProgressScreen/AccountRemoveProgressScreen";
+import AlertStackScreen from './components/AlertStackScreen/AlertStackScreen';
+import {styles} from './AppNavigator.styles';
+import UpdateScreensFlow from '../Containers/FirmwareUpdateScreen/components/UpdateScreensFlow/UpdateScreensFlow';
+import {navigationRef} from './NavigationService';
+import AccountRemoveScreen from '../Containers/AccountRemoveScreen/AccountRemoveScreen';
+import AccountRemoveProgressScreen from '../Containers/AccountRemoveProgressScreen/AccountRemoveProgressScreen';
 import {selectIsShowAlertBadge} from '../Containers/AlertScreen';
-import {GeneralRightNavigation} from "./components/GeneralRightNavigation/GeneralRightNavigation";
+import {GeneralRightNavigation} from './components/GeneralRightNavigation/GeneralRightNavigation';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 
-const HomeStackScreen = (props) => {
-
+const HomeStackScreen = props => {
   /** ############# Language Related codes ############### */
   const [homeScreenObj, setHomeScreenObj] = useState({});
 
@@ -138,13 +154,12 @@ const HomeStackScreen = (props) => {
               />
             </View>
           ),
-          headerRight: () => (<GeneralRightNavigation {...{navigation}}/>),
+          headerRight: () => <GeneralRightNavigation {...{navigation}} />,
         })}
       />
     </HomeStack.Navigator>
   );
 };
-
 
 const CalibrateStack = createStackNavigator();
 const CalibrateStackScreen = ({navigation}) => {
@@ -159,7 +174,7 @@ const CalibrateStackScreen = ({navigation}) => {
   });
   /** ############################ */
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', (e) => {
+    const unsubscribe = navigation.addListener('tabPress', e => {
       let opState = store.getState().calibrate.operationState;
 
       if (
@@ -207,7 +222,6 @@ const CalibrateStackScreen = ({navigation}) => {
 
 const ProfileStack = createStackNavigator();
 const ProfileStackScreen = () => {
-
   /** ############# Language Related codes ############### */
   const [profileScreenObj, setProfileScreenObj] = useState({});
 
@@ -243,14 +257,14 @@ const ProfileStackScreen = () => {
               />
             </View>
           ),
-          headerRight: () => (<GeneralRightNavigation {...{navigation}} />),
+          headerRight: () => <GeneralRightNavigation {...{navigation}} />,
         })}
       />
     </ProfileStack.Navigator>
   );
 };
 
-const HomeTab = (props) => {
+const HomeTab = props => {
   /** ############# Language Related codes ############### */
   const [watchScreenObj, setWatchScreenObj] = useState({});
   const tabNames = Translate('screenNavigation');
@@ -269,7 +283,7 @@ const HomeTab = (props) => {
     isWatchConnected,
     offlineSyncData,
     watchChargerVisibility,
-  } = useSelector((state) => ({
+  } = useSelector(state => ({
     watchWornPopupVisibility: state.watchStatus.watchWornPopupVisibility,
     watchConnectedPopupVisibility:
       state.watchStatus.watchConnectedPopupVisibility,
@@ -356,12 +370,12 @@ const HomeTab = (props) => {
             </View>
           }
           bottomText={
-            <View style={[GlobalStyle.linkText,{ flexWrap: 'wrap'}]}>
+            <View style={[GlobalStyle.linkText, {flexWrap: 'wrap'}]}>
               <Text style={GlobalStyle.leftText}>
                 {watchScreenObj.troubleText}{' '}
               </Text>
               <TouchableOpacity
-                onPress={(e) => modalCloseFun(e)}
+                onPress={e => modalCloseFun(e)}
                 accessible={false}>
                 <Text style={GlobalStyle.rightText}>
                   {watchScreenObj.get_ButtonText}
@@ -394,7 +408,7 @@ const HomeTab = (props) => {
                 style={[GlobalStyle.WrapForSlinglebttn]}
                 mode="contained"
                 labelStyle={{...Fonts.fontSemiBold, ...Fonts.medium}}
-                onPress={(val) => dispatch(watchWornPopupAction(false))}>
+                onPress={val => dispatch(watchWornPopupAction(false))}>
                 OK
               </UIButton>
             </View>
@@ -411,7 +425,7 @@ const HomeTab = (props) => {
       <Tab.Navigator
         tabBarOptions={{
           inactiveTintColor: Colors.inactiveTintColor,
-          activeTintColor:  Colors.activeTintColor,
+          activeTintColor: Colors.activeTintColor,
           safeAreaInset: {bottom: 'never', top: 'never'},
           style: {
             paddingVertical: 10,
@@ -429,8 +443,11 @@ const HomeTab = (props) => {
           options={{
             tabBarLabel: tabNames.home,
             tabBarColor: Colors.white,
-            tabBarIcon: ({focused}) =>
-              <UIHomeSvgIcon fill={focused ? Colors.focusedBlue : Colors.white} />
+            tabBarIcon: ({focused}) => (
+              <UIHomeSvgIcon
+                fill={focused ? Colors.focusedBlue : Colors.white}
+              />
+            ),
           }}
         />
         <Tab.Screen
@@ -439,11 +456,14 @@ const HomeTab = (props) => {
           options={{
             tabBarLabel: tabNames.alerts,
             tabBarColor: Colors.white,
-            tabBarIcon: ({focused}) =>
-                <View style={{position: 'relative'}}>
-                  <UIAlertSvgIcon fill={focused ? Colors.focusedBlue : Colors.white} />
-                  {alertBadge && <View style={styles.redBadge} name="home" />}
-                </View>
+            tabBarIcon: ({focused}) => (
+              <View style={{position: 'relative'}}>
+                <UIAlertSvgIcon
+                  fill={focused ? Colors.focusedBlue : Colors.white}
+                />
+                {alertBadge && <View style={styles.redBadge} name="home" />}
+              </View>
+            ),
           }}
         />
         <Tab.Screen
@@ -459,7 +479,10 @@ const HomeTab = (props) => {
                   fill={Colors.focusedBlue}
                 />
               ) : (
-                <UICalibrateSvgIcon onPress={() => alert('')} fill={Colors.white} />
+                <UICalibrateSvgIcon
+                  onPress={() => alert('')}
+                  fill={Colors.white}
+                />
               ),
             unmountOnBlur: true,
           }}
@@ -473,7 +496,7 @@ const HomeTab = (props) => {
                 CalibrateCommandHandler.resetCalibrate();
               }
             },
-            tabPress: (e) => {
+            tabPress: e => {
               if (offlineSyncData == OFFLINE_SYNC_STATE.SYNC_START) {
                 dispatch(watchSyncAction(true));
                 e.preventDefault();
@@ -488,8 +511,11 @@ const HomeTab = (props) => {
           options={{
             tabBarLabel: tabNames.profile,
             tabBarColor: Colors.white,
-            tabBarIcon: ({focused}) =>
-              <UIProfileSvgIcon fill={focused ? Colors.focusedBlue : Colors.white} />
+            tabBarIcon: ({focused}) => (
+              <UIProfileSvgIcon
+                fill={focused ? Colors.focusedBlue : Colors.white}
+              />
+            ),
           }}
         />
       </Tab.Navigator>
@@ -501,10 +527,9 @@ const GENERAL_SCREEN_PROPS = {
   headerTintColor: Colors.black,
   gestureEnabled: false,
   headerBackTitleVisible: false,
-}
+};
 
 const AppNavigator = () => {
-
   /** ############# Language Related codes ############### */
   const screenTitleObj = useTranslation('allScreenTitle');
   /** ############################ */
@@ -517,7 +542,7 @@ const AppNavigator = () => {
           component={AuthCheckScreen}
           options={() => ({
             headerShown: false,
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -525,7 +550,7 @@ const AppNavigator = () => {
           component={WelcomeScreen}
           options={() => ({
             headerShown: false,
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -537,7 +562,7 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -549,7 +574,7 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -562,7 +587,7 @@ const AppNavigator = () => {
               alignSelf: 'center',
             },
             headerShown: false,
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -574,7 +599,7 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -587,7 +612,7 @@ const AppNavigator = () => {
               alignSelf: 'center',
             },
             headerShown: false,
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -599,7 +624,7 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -610,7 +635,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -621,7 +646,29 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
+          })}
+        />
+        <Stack.Screen
+          name="SkinDetectionIntroScreen"
+          component={IntroScreen}
+          options={() => ({
+            title: screenTitleObj.STInfo_title,
+            headerTitleStyle: {
+              ...Fonts.fontBold,
+            },
+            ...GENERAL_SCREEN_PROPS,
+          })}
+        />
+        <Stack.Screen
+          name="CameraScreenSkinTone"
+          component={CameraComponent}
+          options={() => ({
+            title: screenTitleObj.selectSkinTone,
+            headerTitleStyle: {
+              ...Fonts.fontBold,
+            },
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -632,7 +679,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -643,7 +690,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -654,7 +701,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -665,7 +712,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -676,7 +723,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -689,7 +736,7 @@ const AppNavigator = () => {
               alignSelf: 'center',
             },
             headerShown: false,
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -701,7 +748,7 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -713,7 +760,7 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -732,8 +779,8 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            headerRight: () => (<GeneralRightNavigation {...{navigation}}/>),
-            ...GENERAL_SCREEN_PROPS
+            headerRight: () => <GeneralRightNavigation {...{navigation}} />,
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -744,7 +791,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -755,7 +802,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -767,8 +814,8 @@ const AppNavigator = () => {
               ...Fonts.fontBold,
               alignSelf: 'center',
             },
-            headerRight: () => (<GeneralRightNavigation {...{navigation}}/>),
-            ...GENERAL_SCREEN_PROPS
+            headerRight: () => <GeneralRightNavigation {...{navigation}} />,
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -779,7 +826,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -790,7 +837,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -801,7 +848,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -812,10 +859,7 @@ const AppNavigator = () => {
           name="BloodPressureScreen"
           component={BloodPressureScreen}
         />
-        <Stack.Screen
-          name="HeartRateScreen"
-          component={HeartRateScreen}
-        />
+        <Stack.Screen name="HeartRateScreen" component={HeartRateScreen} />
         <Stack.Screen
           name="RespirationRateScreen"
           component={RespirationRateScreen}
@@ -824,10 +868,7 @@ const AppNavigator = () => {
           name="OxygenSaturationScreen"
           component={OxygenSaturationScreen}
         />
-        <Stack.Screen
-          name="StepsWalkedScreen"
-          component={StepsWalkedScreen}
-        />
+        <Stack.Screen name="StepsWalkedScreen" component={StepsWalkedScreen} />
         <Stack.Screen
           name="MealScreen"
           component={MealScreen}
@@ -836,7 +877,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -847,7 +888,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -858,7 +899,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -869,8 +910,10 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            headerRight: () => ( <GeneralRightNavigation {...{navigation, hideWatchWorn:true}}/>),
-            ...GENERAL_SCREEN_PROPS
+            headerRight: () => (
+              <GeneralRightNavigation {...{navigation, hideWatchWorn: true}} />
+            ),
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -881,7 +924,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -892,7 +935,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -903,7 +946,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -914,7 +957,7 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
         <Stack.Screen
@@ -925,62 +968,61 @@ const AppNavigator = () => {
             headerTitleStyle: {
               ...Fonts.fontBold,
             },
-            ...GENERAL_SCREEN_PROPS
+            ...GENERAL_SCREEN_PROPS,
           })}
         />
-          <Stack.Screen
-              name="DeviceRegistrationScreen"
-              component={DeviceRegistrationScreen}
-              options={() => ({
-                  title: screenTitleObj.verify,
-                  headerTitleStyle: {
-                      ...Fonts.fontBold,
-                  },
-                  headerBackTitle: '',
-                  gestureEnabled: false,
-                  headerBackTitleVisible: false,
-              })}
-          />
-          <Stack.Screen
-              name="UpdateScreensFlow"
-              component={UpdateScreensFlow}
-              options={({ }) => ({
-                  animationEnabled:false,
-                  title: screenTitleObj.firmwareUpdate ,
-                  headerTitleStyle: {
-                      alignSelf: 'center',
-                      // this padding substitutes missing right icon, so the text will be in center
-                      paddingRight:  Platform.OS === 'ios' ? undefined : 60,
-                      ...Fonts.fontBold,
-                  },
-                  headerBackTitle: '',
-                  gestureEnabled: false,
-                  headerBackTitleVisible: false,
-              })}
-          />
-          <Stack.Screen
-              name="AccountRemoveScreen"
-              component={AccountRemoveScreen}
-              options={({ }) => ({
-                  title: screenTitleObj.cancelAccount,
-                  headerTitleStyle: {
-                      alignSelf: 'center',
-                      paddingRight:  Platform.OS === 'ios' ? undefined : 60,
-                      ...Fonts.fontBold,
-                  },
-              })}
-          />
-          <Stack.Screen
-              name="AccountRemoveProgressScreen"
-              component={AccountRemoveProgressScreen}
-              options={({ }) => ({
-                  headerShown: false,
-              })}
-          />
+        <Stack.Screen
+          name="DeviceRegistrationScreen"
+          component={DeviceRegistrationScreen}
+          options={() => ({
+            title: screenTitleObj.verify,
+            headerTitleStyle: {
+              ...Fonts.fontBold,
+            },
+            headerBackTitle: '',
+            gestureEnabled: false,
+            headerBackTitleVisible: false,
+          })}
+        />
+        <Stack.Screen
+          name="UpdateScreensFlow"
+          component={UpdateScreensFlow}
+          options={({}) => ({
+            animationEnabled: false,
+            title: screenTitleObj.firmwareUpdate,
+            headerTitleStyle: {
+              alignSelf: 'center',
+              // this padding substitutes missing right icon, so the text will be in center
+              paddingRight: Platform.OS === 'ios' ? undefined : 60,
+              ...Fonts.fontBold,
+            },
+            headerBackTitle: '',
+            gestureEnabled: false,
+            headerBackTitleVisible: false,
+          })}
+        />
+        <Stack.Screen
+          name="AccountRemoveScreen"
+          component={AccountRemoveScreen}
+          options={({}) => ({
+            title: screenTitleObj.cancelAccount,
+            headerTitleStyle: {
+              alignSelf: 'center',
+              paddingRight: Platform.OS === 'ios' ? undefined : 60,
+              ...Fonts.fontBold,
+            },
+          })}
+        />
+        <Stack.Screen
+          name="AccountRemoveProgressScreen"
+          component={AccountRemoveProgressScreen}
+          options={({}) => ({
+            headerShown: false,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-
 
 export default AppNavigator;

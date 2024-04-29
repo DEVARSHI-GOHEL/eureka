@@ -1,30 +1,43 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {ActivityIndicator} from 'react-native';
+import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import LifePlusModuleExport from '../../../LifePlusModuleExport';
+import {Colors} from '../../Theme';
+import GradientBackground from '../GradientBackground';
 
 // TODO: to send data to native module
 
 const {CustomModule} = LifePlusModuleExport;
 
-const CameraComponent = ({handleCloseCamera}) => {
+const CameraComponent = ({navigation}) => {
   const cameraRef = useRef(null);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const takePicture = async () => {
     try {
       const options = {quality: 0.5, base64: true};
       const data = await cameraRef.current.takePictureAsync(options);
       console.log(data.uri); // Image URI
-      console.log(Object.keys(data));
 
       // Call the skinToneDetectionMethod
       // const result = await CustomModule.skinToneDetectionMethod();
       // console.log('Skin tone detection result:', result);
 
       // Call the displayImage method
-      // const imageResult = await LifePlusModuleExport.displayImage(data.base64);
-      // console.log('Display image result:', imageResult);
-      handleCloseCamera();
+      setIsLoading(true);
+      try {
+        const imageResult = await LifePlusModuleExport.displayImage(
+          data.base64,
+        );
+        console.log('Display image result:', imageResult);
+        navigation.goBack();
+        setIsLoading(false);
+      } catch (error) {
+        console.log('error in sending data to native module', error);
+        setIsLoading(false);
+      }
     } catch (error) {
       console.error('Failed to take picture:', error);
     }
@@ -37,56 +50,49 @@ const CameraComponent = ({handleCloseCamera}) => {
   //   }
   // };
 
-  useEffect(() => {
-    console.log('entered module');
-  }, []);
-
   return (
     <View style={{flex: 1}}>
+      {isLoading && (
+        <ActivityIndicator
+          size={25}
+          color={Colors.ButtonColor}
+          style={{
+            position: 'absolute',
+            right: 0,
+            left: 0,
+            top: 0,
+            bottom: 0,
+            zIndex: 10,
+          }}
+        />
+      )}
       <RNCamera
         ref={cameraRef}
-        style={{flex: 1}}
+        style={{flex: 0.9}}
         type={RNCamera.Constants.Type.back}
         autoFocus={RNCamera.Constants.AutoFocus.on}
       />
-      <View style={{position: 'absolute', bottom: 20, alignSelf: 'center'}}>
+      <GradientBackground style={{flex: 0.1}}>
         <TouchableOpacity onPress={takePicture}>
           <View
             style={{
-              borderWidth: 2,
+              borderWidth: 1,
               borderColor: 'white',
               borderRadius: 50,
-              padding: 20,
-              marginBottom: 20,
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
             <View
               style={{
                 borderWidth: 2,
-                borderColor: 'black',
+                borderColor: Colors.ButtonColor,
                 borderRadius: 50,
-                padding: 5,
-              }}>
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  width: 50,
-                  height: 50,
-                  borderRadius: 25,
-                }}
-              />
-            </View>
+                width: 50,
+                height: 50,
+              }}></View>
           </View>
         </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        onPress={handleCloseCamera}
-        style={{
-          position: 'absolute',
-          right: 10,
-          top: 10,
-        }}>
-        <Text style={{color: 'black'}}>Close</Text>
-      </TouchableOpacity>
+      </GradientBackground>
     </View>
   );
 };

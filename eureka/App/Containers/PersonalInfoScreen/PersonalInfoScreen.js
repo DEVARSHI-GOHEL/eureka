@@ -1185,11 +1185,9 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
     onAddPersonalInfo();
   };
 
-  if (isCameraReady) {
-    return (
-      <CameraComponent handleCloseCamera={() => setIsCameraReady(false)} />
-    );
-  }
+  const handleInfoPageNav = () => {
+    navigation.navigate('SkinDetectionIntroScreen');
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -1359,13 +1357,15 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                   accessibilityLabel="logout-ok"
                   labelStyle={{...Fonts.fontSemiBold}}
                   onPress={() => {
-                    setIsCameraReady(true);
+                    navigation.navigate('CameraScreenSkinTone');
                   }}>
                   Select your Skin Tone
                 </UIButton>
-                <Text style={[styles.fontStyleST, styles.infoUnderlineText]}>
-                  Learn how to select your Skin Tone
-                </Text>
+                <TouchableOpacity onPress={() => handleInfoPageNav()}>
+                  <Text style={[styles.fontStyleST, styles.infoUnderlineText]}>
+                    Learn how to select your Skin Tone
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
 

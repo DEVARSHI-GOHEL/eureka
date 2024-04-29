@@ -772,6 +772,8 @@
   "allScreenTitle": {
     "accInfo_title": "Account Information",
     "personalInfo_title": "Personal Information",
+    "STInfo_title": "How to select your Skin Tone",
+    "selectSkinTone": "Select Skin Tone",
     "medicalInfo_title": "Medical Information",
     "contact_title": "Contacts",
     "addContact_title": "Add a contact",
