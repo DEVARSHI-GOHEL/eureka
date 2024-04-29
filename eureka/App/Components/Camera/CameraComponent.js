@@ -32,7 +32,14 @@ const CameraComponent = ({navigation}) => {
           data.base64,
         );
         console.log('Display image result:', imageResult);
-        navigation.goBack();
+        navigation.navigate({
+          name: 'PersonalInfoScreen',
+          params: {
+            skinType: 6,
+          },
+          merge: true,
+        });
+
         setIsLoading(false);
       } catch (error) {
         console.log('error in sending data to native module', error);
@@ -42,13 +49,6 @@ const CameraComponent = ({navigation}) => {
       console.error('Failed to take picture:', error);
     }
   };
-  // const takePicture = async () => {
-  //   if (cameraRef.current) {
-  //     const options = {quality: 0.5, base64: true};
-  //     const data = await cameraRef.current.takePictureAsync(options);
-  //     console.log(data.uri);
-  //   }
-  // };
 
   return (
     <View style={{flex: 1}}>
@@ -73,25 +73,27 @@ const CameraComponent = ({navigation}) => {
         autoFocus={RNCamera.Constants.AutoFocus.on}
       />
       <GradientBackground style={{flex: 0.1}}>
-        <TouchableOpacity onPress={takePicture}>
-          <View
-            style={{
-              borderWidth: 1,
-              borderColor: 'white',
-              borderRadius: 50,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity onPress={takePicture}>
             <View
               style={{
-                borderWidth: 2,
-                borderColor: Colors.ButtonColor,
+                borderWidth: 1,
+                borderColor: 'white',
                 borderRadius: 50,
-                width: 50,
-                height: 50,
-              }}></View>
-          </View>
-        </TouchableOpacity>
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  borderWidth: 2,
+                  borderColor: Colors.ButtonColor,
+                  borderRadius: 50,
+                  width: 50,
+                  height: 50,
+                }}></View>
+            </View>
+          </TouchableOpacity>
+        </View>
       </GradientBackground>
     </View>
   );

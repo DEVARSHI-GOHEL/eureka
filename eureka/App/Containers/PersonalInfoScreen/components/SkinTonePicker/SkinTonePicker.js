@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import {Colors} from '../../../../Theme';
 import {styles} from './SkinTonePicker.styles';
 
 export const SKIN_TONE_DUMMY_ID = -1;
@@ -25,6 +26,7 @@ export const isValidSkinToneId = id =>
  * @constructor
  */
 const SkinTonePicker = ({selectedId, setSkinTone}) => {
+  console.log('SELECTEDID:::::::::', selectedId);
   return (
     <View style={styles.container}>
       {SKIN_TONES.map(skinTone => (
@@ -44,6 +46,9 @@ const SkinTonePicker = ({selectedId, setSkinTone}) => {
               }`}
               style={[
                 styles.itemColorContent,
+                skinTone.id == selectedId
+                  ? styles.itemColorContentSelected
+                  : null,
                 {
                   backgroundColor: skinTone.color,
                 },

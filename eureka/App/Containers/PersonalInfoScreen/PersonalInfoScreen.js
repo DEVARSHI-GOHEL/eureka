@@ -21,7 +21,7 @@ import IconFont from 'react-native-vector-icons/FontAwesome';
 import FeatherFont from 'react-native-vector-icons/Feather';
 import MaIcon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useIsFocused} from '@react-navigation/native';
 import {HeaderBackButton} from '@react-navigation/stack';
 import {useNetInfo} from '@react-native-community/netinfo';
 import {RNCamera} from 'react-native-camera';
@@ -93,6 +93,10 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
+
+  const isFocused = useIsFocused();
+
+  const {params} = props.route;
   //YASH
   //Changed TextInput for feet and inch TO DropDown
   // const [feet, setFeet] = useState('');
@@ -102,6 +106,9 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   const [meter, setMeter] = useState('');
   const [ethnicity, setEthnicity] = useState('default');
   const [skinTone, setSkinTone] = useState(SKIN_TONE_DUMMY_ID);
+
+  const [fetchedSkinTone, setFetchedSkinTone] = useState(0);
+
   const countries = useCountries();
 
   const [gender, setGender] = useState('default');
@@ -110,42 +117,15 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [patientIdState, setPatientIdState] = useState('');
 
-  const [isCameraReady, setIsCameraReady] = useState(false);
-  const cameraRef = useRef(null);
-
   useEffect(() => {
-    const checkCamera = async () => {
-      const isReady = await cameraRef.current?.getCamera().isReady();
-      setIsCameraReady(isReady);
-    };
-
-    checkCamera();
-  }, []);
-
-  const takePicture = async () => {
-    if (cameraRef.current && isCameraReady) {
-      try {
-        const options = {quality: 0.5, base64: true};
-        const data = await cameraRef.current.takePictureAsync(options);
-        console.log(data); // Image URI
-        console.log(Object.keys(data));
-
-        // Call the skinToneDetectionMethod
-        // const result = await CustomModule.skinToneDetectionMethod();
-        // console.log("Skin tone detection result:", result);
-
-        // Call the displayImage method
-        const imageResult = await LifePlusModuleExport.displayImage(
-          data.base64,
-        );
-        console.log('Display image result:', imageResult);
-      } catch (error) {
-        console.error('Failed to take picture:', error);
-      }
-    } else {
-      console.warn('Camera is not ready');
+    if (isFocused) {
+      // Execute code when the screen becomes focused
+      console.log('Screen A is focused', params);
+      setFetchedSkinTone(params?.skinType);
     }
-  };
+
+    return;
+  }, [isFocused]);
 
   const {
     heightType,
@@ -1344,10 +1324,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
                 {contentScreenObj.skinTone_PickerText}
               </Label>
               <View style={styles.skinTypeView}>
-                <SkinTonePicker
-                  selectedId={skinTone}
-                  setSkinTone={setSkinTone}
-                />
+                <SkinTonePicker selectedId={fetchedSkinTone} />
                 <Text style={styles.fontStyleST}>
                   No Skin Tone selected yet
                 </Text>
