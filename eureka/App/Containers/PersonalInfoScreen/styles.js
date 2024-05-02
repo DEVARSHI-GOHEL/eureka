@@ -216,7 +216,6 @@ export default StyleSheet.create({
   fontStyleST: {
     ...Fonts.fontMedium,
     textAlign: 'center',
-    marginVertical: 8,
   },
   infoUnderlineText: {
     textDecorationLine: 'underline',

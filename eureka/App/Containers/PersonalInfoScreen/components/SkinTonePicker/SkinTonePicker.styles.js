@@ -4,7 +4,7 @@ import {Colors} from '../../../../Theme';
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginBottom: 10,
+    // marginBottom: 10,
   },
   itemContainer: {
     marginRight: 10,

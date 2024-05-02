@@ -26,7 +26,6 @@ export const isValidSkinToneId = id =>
  * @constructor
  */
 const SkinTonePicker = ({selectedId, setSkinTone}) => {
-  console.log('SELECTEDID:::::::::', selectedId);
   return (
     <View style={styles.container}>
       {SKIN_TONES.map(skinTone => (

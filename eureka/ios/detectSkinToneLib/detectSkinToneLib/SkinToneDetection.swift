@@ -29,60 +29,67 @@ public class SkinToneDetection : NSObject, UIImagePickerControllerDelegate, UINa
         return skin
     }
     
-    public func displayImage(_ base64String: String) -> String? {
-        print("base64String is : ", base64String)
-        // Decode base64 string to data
-        guard let imageData = Data(base64Encoded: base64String, options: []) else {
-            print("Error: Invalid base64 string")
-            return ""
-        }
-        
-        // Convert data to UIImage
-        guard let capturedImage = UIImage(data: imageData) else {
-            print("Error: Failed to create image from base64 data")
-            return ""
-        }
-        
-        if let pixelBuffer = capturedImage.pixelBuffer(width: 512, height: 512) {
-          imageProcessor.processImage(pixelBuffer, completion: { result in
-            switch (result) {
-            case .success(let prediction):
-              print(prediction)
-              let modelSuccess = Date()
-              print(modelSuccess.timeIntervalSince1970)
-              //                        if let feature = prediction.featureName {
-              //                            if let output = prediction.featureValue {
-              if let multiArray = prediction.featureValue.multiArrayValue {
-                // Convert MLMultiArray to pixel buffer
-                print("multiArray is : ", multiArray)
-                
-                let segmentationMap = self.createSegmentationMap(from: multiArray)
-                
-                // Convert segmentation map to UIImage
-                let maskImage = self.createMaskImage(from: segmentationMap)!
-                
-                guard let cropImage = self.applyBinaryMask(originalImage: self.imageFromPixelBuffer(pixelBuffer: pixelBuffer)!, binaryMaskImage: maskImage) else { return }
-                self.cropedImge = cropImage
-                
-                //            print("Final Image is generated here")
-                //            self.findSkinTone(image: cropImage, colorArray: sortedColors)
-                
-              }
-            case .failure(let error):
-              print("error")
-            }
-          })
-        }
-        
-        // Display the image (you can implement your own way of displaying the image)
-//        let imageView = UIImageView(image: image)
-//        imageView.contentMode = .scaleAspectFit
-//        imageView.frame = UIScreen.main.bounds
-//        UIApplication.shared.keyWindow?.addSubview(imageView)
-        
-        //        print("Image passed : ")
-        return "Image passed : "
+    public func displayImage(_ base64String: String) -> Int {
+        // Generate a random number between 0 and 6
+        let randomNumber = Int.random(in: 0...6)
+        return randomNumber
     }
+    
+//
+//    public func displayImage(_ base64String: String) -> String? {
+//        print("base64String is : ", base64String)
+//        // Decode base64 string to data
+//        guard let imageData = Data(base64Encoded: base64String, options: []) else {
+//            print("Error: Invalid base64 string")
+//            return ""
+//        }
+//        
+//        // Convert data to UIImage
+//        guard let capturedImage = UIImage(data: imageData) else {
+//            print("Error: Failed to create image from base64 data")
+//            return ""
+//        }
+//        
+//        if let pixelBuffer = capturedImage.pixelBuffer(width: 512, height: 512) {
+//          imageProcessor.processImage(pixelBuffer, completion: { result in
+//            switch (result) {
+//            case .success(let prediction):
+//              print(prediction)
+//              let modelSuccess = Date()
+//              print(modelSuccess.timeIntervalSince1970)
+//              //                        if let feature = prediction.featureName {
+//              //                            if let output = prediction.featureValue {
+//              if let multiArray = prediction.featureValue.multiArrayValue {
+//                // Convert MLMultiArray to pixel buffer
+//                print("multiArray is : ", multiArray)
+//                
+//                let segmentationMap = self.createSegmentationMap(from: multiArray)
+//                
+//                // Convert segmentation map to UIImage
+//                let maskImage = self.createMaskImage(from: segmentationMap)!
+//                
+//                guard let cropImage = self.applyBinaryMask(originalImage: self.imageFromPixelBuffer(pixelBuffer: pixelBuffer)!, binaryMaskImage: maskImage) else { return }
+//                self.cropedImge = cropImage
+//                
+//                //            print("Final Image is generated here")
+//                //            self.findSkinTone(image: cropImage, colorArray: sortedColors)
+//                
+//              }
+//            case .failure(let error):
+//              print("error")
+//            }
+//          })
+//        }
+//        
+//        // Display the image (you can implement your own way of displaying the image)
+////        let imageView = UIImageView(image: image)
+////        imageView.contentMode = .scaleAspectFit
+////        imageView.frame = UIScreen.main.bounds
+////        UIApplication.shared.keyWindow?.addSubview(imageView)
+//        
+//        //        print("Image passed : ")
+//        return "Image passed : "
+//    }
     
     func createSegmentationMap(from segmentationMap: MLMultiArray) -> MLMultiArray {
       let height = 512

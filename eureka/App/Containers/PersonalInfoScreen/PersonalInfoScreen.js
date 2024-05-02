@@ -69,7 +69,6 @@ import WeightComponent from './components/WeightComponent';
 import {useWeight} from './components/WeightComponent/hooks';
 import {t} from 'i18n-js';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import CameraComponent from '../../Components/Camera/CameraComponent';
 
 const ETHNICITY_ARRAY = [
   {id: 1, value: 'ethnicity_1'},
@@ -505,7 +504,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       heightImperial * 1
     },weight:${
       weightParams.resultWeight * 1
-    },ethnicityId:${ethnicity},skinToneId:${skinTone},country:\"${
+    },ethnicityId:${ethnicity},skinToneId:${fetchedSkinTone},country:\"${
       listSelectedItem.code
     }\",unitOfMeasurement:\"${unitsOfMeasurement}\"){statusCode body}}`;
 
@@ -514,7 +513,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       birth_date: "'" + year + '-' + month + '-' + day + "'",
       gender_id: "'" + gender + "'",
       ethnicity_id: ethnicity,
-      skin_tone_id: skinTone,
+      skin_tone_id: fetchedSkinTone,
       country: "'" + listSelectedItem.code + "'",
       height_ft: feet * 1,
       height_in: inch * 1,
@@ -879,7 +878,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       mystring * 1
     }\",weight:\"${
       weightParams.resultWeight * 1
-    }\",ethnicityId:\"${ethnicity}\",skinToneId:\"${skinTone}\",country:\"${
+    }\",ethnicityId:\"${ethnicity}\",skinToneId:\"${fetchedSkinTone}\",country:\"${
       listSelectedItem.code
     }\",unitOfMeasurement:\"${measurementValue}\"){statusCode body}}`;
 
@@ -888,7 +887,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
       birth_date: "'" + year + '-' + month + '-' + day + "'",
       gender_id: "'" + gender + "'",
       ethnicity_id: ethnicity,
-      skin_tone_id: skinTone,
+      skin_tone_id: fetchedSkinTone,
       country: "'" + listSelectedItem.code + "'",
       height_ft: feet,
       height_in: inch,
@@ -1134,7 +1133,7 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
     weightParams.resultWeight <= 500 &&
     weightParams.resultWeight >= 1 &&
     ethnicity !== 'default' &&
-    isValidSkinToneId(skinTone) &&
+    isValidSkinToneId(fetchedSkinTone) &&
     gender !== 'default' &&
     listSelectedItem !== null &&
     listSelectedItem !== undefined &&
@@ -1325,24 +1324,48 @@ const PersonalInfoScreen = ({navigation, ...props}) => {
               </Label>
               <View style={styles.skinTypeView}>
                 <SkinTonePicker selectedId={fetchedSkinTone} />
-                <Text style={styles.fontStyleST}>
-                  No Skin Tone selected yet
-                </Text>
-                <UIButton
-                  style={[GlobalStyle.WrapForSlinglebttn]}
-                  mode="contained"
-                  accessibilityLabel="logout-ok"
-                  labelStyle={{...Fonts.fontSemiBold}}
-                  onPress={() => {
-                    navigation.navigate('CameraScreenSkinTone');
-                  }}>
-                  Select your Skin Tone
-                </UIButton>
-                <TouchableOpacity onPress={() => handleInfoPageNav()}>
-                  <Text style={[styles.fontStyleST, styles.infoUnderlineText]}>
-                    Learn how to select your Skin Tone
-                  </Text>
-                </TouchableOpacity>
+                <View style={{marginTop: 15}}>
+                  {fetchedSkinTone === 0 ? (
+                    <>
+                      <Text style={styles.fontStyleST}>
+                        No Skin Tone selected yet
+                      </Text>
+                      <UIButton
+                        style={[
+                          GlobalStyle.WrapForSlinglebttn,
+                          {marginVertical: 8},
+                        ]}
+                        mode="contained"
+                        accessibilityLabel="logout-ok"
+                        labelStyle={{...Fonts.fontSemiBold}}
+                        onPress={() => {
+                          navigation.navigate('CameraScreenSkinTone');
+                        }}>
+                        Select your Skin Tone
+                      </UIButton>
+                      <TouchableOpacity onPress={() => handleInfoPageNav()}>
+                        <Text
+                          style={[
+                            styles.fontStyleST,
+                            styles.infoUnderlineText,
+                          ]}>
+                          Learn how to select your Skin Tone
+                        </Text>
+                      </TouchableOpacity>
+                    </>
+                  ) : (
+                    <UIButton
+                      style={[GlobalStyle.WrapForSlinglebttn]}
+                      mode="contained"
+                      accessibilityLabel="logout-ok"
+                      labelStyle={{...Fonts.fontSemiBold}}
+                      onPress={() => {
+                        navigation.navigate('CameraScreenSkinTone');
+                      }}>
+                      Re-assess your Skin Tone
+                    </UIButton>
+                  )}
+                </View>
               </View>
             </View>
 

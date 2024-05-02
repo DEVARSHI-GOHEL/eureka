@@ -39,7 +39,7 @@ import TermConditionScreen from '../Containers/TermConditionScreen';
 import AccountInfoScreen from '../Containers/AccountInfoScreen';
 import PersonalInfoScreen from '../Containers/PersonalInfoScreen';
 import IntroScreen from '../Containers/PersonalInfoScreen/components/SkinDetectionIntro/index';
-import CameraComponent from '../Components/Camera';
+import CameraComponent from '../Containers/Camera';
 import MedicalInfoScreen from '../Containers/MedicalInfoScreen';
 import ContactsScreen from '../Containers/ContactsScreen';
 import AddContactScreen from '../Containers/AddContactScreen';
